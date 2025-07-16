@@ -15,6 +15,7 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
 
   const { login } = useAuth();
   const router = useRouter();
@@ -66,7 +67,7 @@ export default function LoginForm() {
             showPassword={showPassword}
             setShowPassword={setShowPassword}
           />
-          <CheckboxLogin />
+          <CheckboxLogin email={email} setEmail={setEmail} />
           <ButtonLogin isLoading={isLoading} />
         </div>
       </form>

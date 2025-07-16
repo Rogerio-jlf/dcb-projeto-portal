@@ -18,7 +18,7 @@ export default function EmailInputLogin({ value, onChange }: LoginInputProps) {
           <Mail className="h-7 w-7 text-emerald-400" />
         </div>
         <input
-          type="email"
+          type="number"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           className="text-lg block w-full pl-14 pr-3 py-4 bg-white/10 border border-white/50 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-300 hover:bg-white/20 hover:border-white/90 tracking-wider"
