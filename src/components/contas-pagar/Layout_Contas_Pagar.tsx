@@ -1,18 +1,17 @@
 "use client";
 
-import axios from "axios";
-import { SidebarNavegacao } from "../sidebar/Sidebar";
-import { TabelaContasPagar } from "./Tabela_Contas_Pagar";
-import { FiltrosContasPagar } from "./Filtros_Contas_Pagar";
-import { CardsContasPagar } from "./Cards_Contas_Pagar";
-import { useEffect } from "react";
-import { ContasAPagarType } from "@/types/financeiro";
 import { useAuth } from "@/contexts/auth-context";
 import { useFiltrosFinanceiro } from "@/contexts/filtros/financeiro";
+import { ContasAPagarType } from "@/types/financeiro";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { FooterMobile } from "./Footer_Mobile";
 import { Loader2 } from "lucide-react";
+import { useEffect } from "react";
 import api from "../axios";
+import { SidebarNavegacao } from "../sidebar/Sidebar";
+import { CardsContasPagar } from "./Cards_Contas_Pagar";
+import { FiltrosContasPagar } from "./Filtros_Contas_Pagar";
+import { FooterMobile } from "./Footer_Mobile";
+import { TabelaContasPagar } from "./Tabela_Contas_Pagar";
 
 export function LayoutContasPagar() {
   const queryClient = useQueryClient();
@@ -40,12 +39,9 @@ export function LayoutContasPagar() {
   });
 
   const total = contasAPagar?.length || 0;
-  const pagas =
-    contasAPagar?.filter((n: ContasAPagarType) => n.STATUS === "3").length || 0;
-  const pendentes =
-    contasAPagar?.filter((n: ContasAPagarType) => n.STATUS === "1").length || 0;
-  const vencidas =
-    contasAPagar?.filter((n: ContasAPagarType) => n.STATUS === "2").length || 0;
+  const pagas = contasAPagar?.filter((n: ContasAPagarType) => n.STATUS === "3").length || 0;
+  const pendentes = contasAPagar?.filter((n: ContasAPagarType) => n.STATUS === "1").length || 0;
+  const vencidas = contasAPagar?.filter((n: ContasAPagarType) => n.STATUS === "2").length || 0;
 
   // function filtrarPorStatus(contas: ContasAPagarType[]): ContasAPagarType[] {
   //   return status == "0"

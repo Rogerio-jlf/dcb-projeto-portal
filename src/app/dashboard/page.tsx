@@ -4,7 +4,7 @@ import { DashboardLayout } from "@/components/dashboard/Layout_Dashboard";
 export default function DashboardPage() {
   return (
     // <ProtectedRoute>
-      <DashboardLayout />
+    <DashboardLayout />
     // </ProtectedRoute>
   );
 }

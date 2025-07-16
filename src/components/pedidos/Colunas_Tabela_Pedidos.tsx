@@ -1,17 +1,11 @@
 // components/ColunasContasPagar.tsx
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
-import {
-  Circle,
-  CircleCheck,
-  CircleX,
-  Clock,
-  UnlockKeyholeIcon,
-} from "lucide-react";
 import { PedidoStatusLabel, PedidoType } from "@/types/pedido";
-import { ModalItensPedido } from "./Modal_Itens_Pedido";
+import { ColumnDef } from "@tanstack/react-table";
+import { Circle, CircleCheck, CircleX, Clock, UnlockKeyholeIcon } from "lucide-react";
 import DownloadXml from "./Download_XML";
+import { ModalItensPedido } from "./Modal_Itens_Pedido";
 
 export const StatusBadge = ({ status }: { status: string }) => {
   const configs = {
@@ -71,8 +65,7 @@ export const StatusBadge = ({ status }: { status: string }) => {
     },
   };
 
-  const config =
-    configs[status.toUpperCase() as keyof typeof configs] || configs["1"];
+  const config = configs[status.toUpperCase() as keyof typeof configs] || configs["1"];
   const Icon = config.icon;
 
   return (
@@ -90,9 +83,7 @@ export const StatusBadge = ({ status }: { status: string }) => {
         <div className={`p-2 rounded-full ${config.bgMobile} border`}>
           <Icon className={`w-5 h-5 ${config.textMobile}`} />
         </div>
-        <span className={`text-sm font-semibold ${config.textMobile}`}>
-          {status}
-        </span>
+        <span className={`text-sm font-semibold ${config.textMobile}`}>{status}</span>
       </div>
     </>
   );
@@ -103,7 +94,9 @@ export const colunasTabelaPedidos: ColumnDef<PedidoType>[] = [
     accessorKey: "C5_NUM",
     header: "Pedido nº",
     cell: ({ getValue }) => (
-      <div className="font-semibold text-lg text-gray-800 italic tracking-wider">{String(getValue())}</div>
+      <div className="font-semibold text-lg text-gray-800 italic tracking-wider">
+        {String(getValue())}
+      </div>
     ),
   },
   // ------------------------------------------------

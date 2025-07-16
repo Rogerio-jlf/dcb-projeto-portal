@@ -1,15 +1,15 @@
 "use client";
 
-import { SidebarNavegacao } from "../sidebar/Sidebar";
-import { TabelaPedidos } from "./Tabela_Pedidos";
-import { FiltrosPedidos } from "./Filtros_Pedidos";
-import { PedidoType } from "@/types/pedido";
-import { useEffect, useState } from "react";
-import { FooterMobile } from "./Footer_Mobile ";
-import { useFiltrosPedido } from "@/contexts/filtros/pedidos";
 import { useAuth } from "@/contexts/auth-context";
+import { useFiltrosPedido } from "@/contexts/filtros/pedidos";
+import { PedidoType } from "@/types/pedido";
 import { Loader2 } from "lucide-react";
+import { useEffect, useState } from "react";
 import api from "../axios";
+import { SidebarNavegacao } from "../sidebar/Sidebar";
+import { FiltrosPedidos } from "./Filtros_Pedidos";
+import { FooterMobile } from "./Footer_Mobile ";
+import { TabelaPedidos } from "./Tabela_Pedidos";
 
 export function LayoutPedidos() {
   const [pedido, setPedidos] = useState<PedidoType[]>([]);

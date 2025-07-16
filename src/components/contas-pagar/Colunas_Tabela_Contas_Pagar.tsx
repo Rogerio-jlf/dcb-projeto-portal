@@ -1,9 +1,9 @@
 // components/ColunasContasPagar.tsx
 "use client";
 
+import { ContasAPagarStatus, ContasAPagarType } from "@/types/financeiro";
 import { ColumnDef } from "@tanstack/react-table";
 import { AlertTriangle, CheckCircle, Clock } from "lucide-react";
-import { ContasAPagarType, ContasAPagarStatus } from "@/types/financeiro";
 
 export interface ContasPagarProps {
   status: string;
@@ -43,8 +43,7 @@ export const StatusBadge = ({ status }: { status: string }) => {
     },
   };
 
-  const config =
-    configs[status.toUpperCase() as keyof typeof configs] || configs["1"];
+  const config = configs[status.toUpperCase() as keyof typeof configs] || configs["1"];
   const Icon = config.icon;
 
   return (
@@ -125,16 +124,12 @@ export const colunasTabelaContasPagar: ColumnDef<ContasAPagarType>[] = [
       return (
         <div
           className={`${
-            isOverdue
-              ? "text-red-500 font-semibold text-lg italic tracking-wider"
-              : ""
+            isOverdue ? "text-red-500 font-semibold text-lg italic tracking-wider" : ""
           }`}
         >
           {`${day}/${month}/${year}`}
           {isOverdue && (
-            <div className="text-sm text-red-500 italic font-semibold tracking-wider">
-              Vencido
-            </div>
+            <div className="text-sm text-red-500 italic font-semibold tracking-wider">Vencido</div>
           )}
         </div>
       );
@@ -180,11 +175,7 @@ export const colunasTabelaContasPagar: ColumnDef<ContasAPagarType>[] = [
     cell: ({ getValue }) => {
       const valor = Number(getValue());
       return (
-        <div
-          className={`font-bold italic ${
-            valor > 0 ? "text-red-500" : "text-gray-800"
-          }`}
-        >
+        <div className={`font-bold italic ${valor > 0 ? "text-red-500" : "text-gray-800"}`}>
           {valor.toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",

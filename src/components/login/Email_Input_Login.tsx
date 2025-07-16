@@ -10,9 +10,7 @@ interface LoginInputProps {
 export default function EmailInputLogin({ value, onChange }: LoginInputProps) {
   return (
     <div className="space-y-2">
-      <label className="block text-lg font-semibold text-white tracking-wider">
-        Email
-      </label>
+      <label className="block text-lg font-semibold text-white tracking-wider">Email</label>
       <div className="relative group">
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <Mail className="h-7 w-7 text-emerald-400" />

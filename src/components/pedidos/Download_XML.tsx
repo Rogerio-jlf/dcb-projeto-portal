@@ -1,13 +1,13 @@
 "use client";
 
-import { useMutation } from "@tanstack/react-query";
 import { PedidoType } from "@/types/pedido";
+import { useMutation } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 import { FileDown } from "lucide-react";
-import { Button } from "../ui/button";
+import { useState } from "react";
 import { toast } from "sonner";
 import api from "../axios";
-import { AxiosError } from "axios";
-import { useState } from "react";
+import { Button } from "../ui/button";
 
 export default function DownloadXml({ pedido }: { pedido: PedidoType }) {
   const mutation = useMutation({
@@ -43,8 +43,7 @@ export default function DownloadXml({ pedido }: { pedido: PedidoType }) {
     onError: (error: AxiosError) => {
       toast.dismiss();
       toast.error("Erro ao gerar XML", {
-        description:
-          (error?.response?.data as { error?: string })?.error ?? error.message,
+        description: (error?.response?.data as { error?: string })?.error ?? error.message,
         duration: 3000,
         icon: "❌",
         style: {

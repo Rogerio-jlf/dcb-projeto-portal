@@ -1,5 +1,5 @@
-import { Row, flexRender } from "@tanstack/react-table";
 import { ContasAPagarType } from "@/types/financeiro";
+import { Row, flexRender } from "@tanstack/react-table";
 
 interface Props {
   row: Row<ContasAPagarType>;
@@ -29,10 +29,7 @@ export function TabelaMobile({ row }: Props) {
 
       {actionCell && (
         <div className="flex justify-end pt-2">
-          {flexRender(
-            actionCell.column.columnDef.cell,
-            actionCell.getContext()
-          )}
+          {flexRender(actionCell.column.columnDef.cell, actionCell.getContext())}
         </div>
       )}
     </div>

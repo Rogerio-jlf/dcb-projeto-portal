@@ -1,20 +1,20 @@
 "use client";
 
-import React, { useState } from "react";
 import { CardsMetricas } from "@/components/dashboard/Cards_Metricas_Dashboard";
 import { ComprasPorProdutoChart } from "@/components/dashboard/Compras_Por_Produto_Chart";
-import { ContasPagarMesChart } from "@/components/dashboard/Contas_A_Pagar_Mes_Chart";
 import { ContasPagarAnoChart } from "@/components/dashboard/Contas_A_Pagar_Ano_Chart";
+import { ContasPagarMesChart } from "@/components/dashboard/Contas_A_Pagar_Mes_Chart";
+import { useState } from "react";
 
 // import { TrendingUp, Package, Calendar } from "lucide-react";
-import { SidebarNavegacao } from "../sidebar/Sidebar";
-import { FiltrosDashboard } from "./Filtros_Dashboard";
-import { useQuery } from "@tanstack/react-query";
-import { useFiltrosFinanceiro } from "@/contexts/filtros/financeiro";
 import { useAuth } from "@/contexts/auth-context";
+import { useFiltrosFinanceiro } from "@/contexts/filtros/financeiro";
 import { ContasAPagarType } from "@/types/financeiro";
 import { ItemPedidoType } from "@/types/pedido";
+import { useQuery } from "@tanstack/react-query";
 import api from "../axios";
+import { SidebarNavegacao } from "../sidebar/Sidebar";
+import { FiltrosDashboard } from "./Filtros_Dashboard";
 
 const contasAnuais = [
   { mes: "Jan", pagas: 12400, aberto: 8200 },
@@ -32,8 +32,6 @@ const contasAnuais = [
 ];
 
 export function DashboardLayout() {
-
-
   /* const queryClient = useQueryClient(); */
   const { user } = useAuth();
   const {
@@ -42,7 +40,7 @@ export function DashboardLayout() {
     notaFiscal,
     /* status, */
   } = useFiltrosFinanceiro();
-  
+
   /* const {
     data: contasAPagar,
     isError,
@@ -50,36 +48,42 @@ export function DashboardLayout() {
     isFetching
 
   } = */ useQuery({
-    queryKey: ['contasAPagar'],
+    queryKey: ["contasAPagar"],
     queryFn: async () => {
-      const { data } = await api.post('/api/accounts-payable', {
+      const { data } = await api.post("/api/accounts-payable", {
         CLIENTE: user?.cod,
         LOJA: user?.loja,
-        DATAINI: dataInicio.toISOString().split('T')[0].replace(/-/g, ''),
-        DATAFIM: dataFim.toISOString().split('T')[0].replace(/-/g, ''),
-        NOTAFISCAL: notaFiscal
+        DATAINI: dataInicio.toISOString().split("T")[0].replace(/-/g, ""),
+        DATAFIM: dataFim.toISOString().split("T")[0].replace(/-/g, ""),
+        NOTAFISCAL: notaFiscal,
       });
 
-      const contasAPagar = data.dados ?? [] as ContasAPagarType[];
+      const contasAPagar = data.dados ?? ([] as ContasAPagarType[]);
 
-      const totalCompras = contasAPagar?.reduce((acc: number, item: ContasAPagarType) => acc + item.E1_VALOR, 0);
-      const comprasPagas = contasAPagar?.filter((item: ContasAPagarType) => item.STATUS === "3")?.reduce((acc: number, item: ContasAPagarType) => acc + item.E1_VALOR, 0);
-      const comprasAberto = contasAPagar?.filter((item: ContasAPagarType) => item.STATUS === "1")?.reduce((acc: number, item: ContasAPagarType) => acc + item.E1_VALOR, 0);
+      const totalCompras = contasAPagar?.reduce(
+        (acc: number, item: ContasAPagarType) => acc + item.E1_VALOR,
+        0
+      );
+      const comprasPagas = contasAPagar
+        ?.filter((item: ContasAPagarType) => item.STATUS === "3")
+        ?.reduce((acc: number, item: ContasAPagarType) => acc + item.E1_VALOR, 0);
+      const comprasAberto = contasAPagar
+        ?.filter((item: ContasAPagarType) => item.STATUS === "1")
+        ?.reduce((acc: number, item: ContasAPagarType) => acc + item.E1_VALOR, 0);
       setCardData({
         totalCompras,
         comprasPagas,
-        comprasAberto
-      })
+        comprasAberto,
+      });
       setContasAPagarTot([
-        { name: "Pagas", value: comprasPagas??0},
-        { name: "Em aberto", value: comprasAberto??0},
-      ])
+        { name: "Pagas", value: comprasPagas ?? 0 },
+        { name: "Em aberto", value: comprasAberto ?? 0 },
+      ]);
 
-      return data.dados ?? [] as ContasAPagarType[];
+      return data.dados ?? ([] as ContasAPagarType[]);
     },
     refetchOnWindowFocus: false,
-  })
-
+  });
 
   /* const {
     data: itensPedidos,
@@ -87,10 +91,10 @@ export function DashboardLayout() {
     isLoading: isLoadingItensPedidos,
     isFetching: isFetchingItensPedidos
 
-  } =  */useQuery({
-    queryKey: ['itensPedidos'],
+  } =  */ useQuery({
+    queryKey: ["itensPedidos"],
     queryFn: async () => {
-      const { data } = await api.post('/api/itens-pedido', {
+      const { data } = await api.post("/api/itens-pedido", {
         filial: "0101 ",
         cliente: user?.cod,
         loja: user?.loja,
@@ -103,33 +107,31 @@ export function DashboardLayout() {
       itensPedidos.map((item: ItemPedidoType) => {
         const valorAtual = mapItens.get(item.B1_DESC) || 0;
         mapItens.set(item.B1_DESC, valorAtual + item.C6_VALOR);
-      })
+      });
 
       // Object.entries(mapItens) retorna um array vazio porque mapItens é um Map, não um objeto simples.
       // Para obter as entradas de um Map, use mapItens.entries() ou Array.from(mapItens.entries())
       const totalComprasProProdutos = Array.from(mapItens.entries()).map(([produto, valor]) => ({
         produto,
-        valor
-      }))
+        valor,
+      }));
 
-      setComprasProProduto(totalComprasProProdutos)
+      setComprasProProduto(totalComprasProProdutos);
 
       return itensPedidos;
     },
     refetchOnWindowFocus: false,
-  })
+  });
 
   const [cardData, setCardData] = useState({
     totalCompras: 0,
     comprasPagas: 0,
-    comprasAberto:0,
-  })
+    comprasAberto: 0,
+  });
 
-  const [contasAPagarTot, setContasAPagarTot] = useState<any>([])
+  const [contasAPagarTot, setContasAPagarTot] = useState<any>([]);
 
-  const [comprasPorProduto, setComprasProProduto] = useState([
-    { produto: "", valor: 0 },])
-
+  const [comprasPorProduto, setComprasProProduto] = useState([{ produto: "", valor: 0 }]);
 
   return (
     <div className="flex h-screen">

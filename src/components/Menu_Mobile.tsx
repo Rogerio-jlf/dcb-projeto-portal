@@ -1,12 +1,6 @@
 // components/MenuNavegacaoMobile.tsx
+import { FileText, LayoutDashboard, Menu, ShoppingCart, X } from "lucide-react";
 import Link from "next/link";
-import {
-  LayoutDashboard,
-  FileText,
-  ShoppingCart,
-  Menu,
-  X,
-} from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
@@ -55,9 +49,7 @@ export function MenuNavegacaoMobile() {
           >
             {/* Efeito de brilho no botão */}
             <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600 rounded-lg opacity-0 hover:opacity-20 transition-opacity duration-300"></div>
-            <div className="relative">
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </div>
+            <div className="relative">{isOpen ? <X size={24} /> : <Menu size={24} />}</div>
           </button>
         </div>
       </div>
@@ -136,10 +128,7 @@ export function MenuNavegacaoMobile() {
                 )}
 
                 <div className="relative z-10 flex items-center gap-4">
-                  <Icon
-                    size={20}
-                    className={isActive ? "text-white" : "text-slate-400"}
-                  />
+                  <Icon size={20} className={isActive ? "text-white" : "text-slate-400"} />
                   <span className="font-medium">{label}</span>
                 </div>
 
@@ -162,9 +151,7 @@ export function MenuNavegacaoMobile() {
         {/* Rodapé decorativo */}
         <div className="absolute bottom-4 left-4 right-4">
           <div className="h-px bg-gradient-to-r from-transparent via-slate-600 to-transparent" />
-          <div className="mt-4 text-center text-sm text-slate-500">
-            Sistema v1.0
-          </div>
+          <div className="mt-4 text-center text-sm text-slate-500">Sistema v1.0</div>
         </div>
 
         {/* Efeito de fundo decorativo */}

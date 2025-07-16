@@ -1,14 +1,14 @@
+import { useScreenSize } from "@/hooks/useScreenSize";
 import {
-  LineChart,
+  CartesianGrid,
+  Legend,
   Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
 } from "recharts";
-import { useScreenSize } from "@/hooks/useScreenSize";
 
 interface ContaMensal {
   mes: string;
@@ -44,11 +44,7 @@ export function ContasPagarAnoChart({ data }: { data: ContaMensal[] }) {
               bottom: 5,
             }}
           >
-            <CartesianGrid
-              strokeDasharray="3 3"
-              vertical={false}
-              stroke="#f3f4f6"
-            />
+            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
             <XAxis
               dataKey="mes"
               tick={{

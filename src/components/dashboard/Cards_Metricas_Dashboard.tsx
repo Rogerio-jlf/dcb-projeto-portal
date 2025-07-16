@@ -1,6 +1,6 @@
 // StatCardsGrid.tsx
+import { CheckCircle, Clock, ShoppingCart } from "lucide-react";
 import React from "react";
-import { ShoppingCart, CheckCircle, Clock } from "lucide-react";
 
 const formatCurrency = (value: number) =>
   new Intl.NumberFormat("pt-BR", {
@@ -30,18 +30,14 @@ function StatCard({
   return (
     <div className="bg-white rounded-lg shadow-md shadow-black p-6 border border-slate-200 group">
       <div className="flex items-center justify-between">
-        <div
-          className={`p-3 rounded-xl ${bgColorIcon} transition-transform group-hover:rotate-12`}
-        >
+        <div className={`p-3 rounded-xl ${bgColorIcon} transition-transform group-hover:rotate-12`}>
           <Icon className={`w-7 h-7 ${colorIcon}`} />
         </div>
         <div className="text-right">
           <p className="text-base font-bold text-gray-800 uppercase italic tracking-wider">
             {title}
           </p>
-          <p className={`text-3xl font-extrabold ${textColor}`}>
-            {formatCurrency(value)}
-          </p>
+          <p className={`text-3xl font-extrabold ${textColor}`}>{formatCurrency(value)}</p>
         </div>
       </div>
       <div className="mt-6">

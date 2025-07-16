@@ -1,7 +1,7 @@
 "use client";
-import Image from "next/image";
-import { ChevronRight, Heart, Shield, Activity } from "lucide-react";
 import { useUserData } from "@/hooks/useUserData";
+import { Activity, ChevronRight, Heart, Shield } from "lucide-react";
+import Image from "next/image";
 
 interface SidebarHeaderProps {
   isCollapsed: boolean;
@@ -9,10 +9,7 @@ interface SidebarHeaderProps {
   currentTime: Date;
 }
 
-export function SidebarHeader({
-  isCollapsed,
-  toggleCollapse,
-}: SidebarHeaderProps) {
+export function SidebarHeader({ isCollapsed, toggleCollapse }: SidebarHeaderProps) {
   const { data: userData, isLoading: userLoading } = useUserData();
 
   return (
@@ -56,14 +53,10 @@ export function SidebarHeader({
         <div className="px-6 py-4 border-b border-emerald-300/10">
           <div className="bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 rounded-xl p-4 border border-emerald-300/20">
             <div className="flex flex-col space-y-1">
-              <span className="text-cyan-300 text-xs font-medium block">
-                Bem-vindo,
-              </span>
+              <span className="text-cyan-300 text-xs font-medium block">Bem-vindo,</span>
 
               <span className="text-cyan-300 text-sm block">
-                {userLoading
-                  ? "Carregando usuário..."
-                  : userData?.nome ?? "Usuário"}
+                {userLoading ? "Carregando usuário..." : (userData?.nome ?? "Usuário")}
               </span>
             </div>
           </div>

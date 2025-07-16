@@ -6,8 +6,7 @@ export default function TextoLogin() {
           DESDE 1978
         </div>
         <div className="text-3xl text-right font-extralight italic opacity-90 animate-fade-in">
-          Servindo em{" "}
-          <strong className="font-bold text-emerald-300">Alto Nível</strong> a
+          Servindo em <strong className="font-bold text-emerald-300">Alto Nível</strong> a
         </div>
         <div className="text-3xl text-right font-extralight italic opacity-90 animate-fade-in-delayed">
           <span className="text-cyan-300">comunidade médico hospitalar</span>

@@ -1,24 +1,19 @@
 "use client";
 
-import React from "react";
 import {
-  BarChart,
   Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  Cell,
 } from "recharts";
 
 import { useScreenSize } from "@/hooks/useScreenSize";
 
-export function ComprasPorProdutoChart({
-  data,
-}: {
-  data: { produto: string; valor: number }[];
-}) {
+export function ComprasPorProdutoChart({ data }: { data: { produto: string; valor: number }[] }) {
   const screen = useScreenSize();
 
   const formatCurrency = (value: number) =>
@@ -35,9 +30,7 @@ export function ComprasPorProdutoChart({
         <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-800 uppercase italic tracking-wider">
           Compras por Produto
         </h3>
-        <p className="text-base text-gray-600 font-semibold italic">
-          Distribuição por produto
-        </p>
+        <p className="text-base text-gray-600 font-semibold italic">Distribuição por produto</p>
       </div>
 
       <div className="flex-grow">
@@ -47,11 +40,7 @@ export function ComprasPorProdutoChart({
             margin={{ top: 5, right: 10, bottom: 60, left: 10 }}
             barSize={screen.isMobile ? 24 : screen.isTablet ? 30 : 38}
           >
-            <CartesianGrid
-              strokeDasharray="3 3"
-              vertical={false}
-              stroke="#f0f0f0"
-            />
+            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
             <XAxis
               dataKey="produto"
               tick={{
@@ -111,9 +100,7 @@ export function ComprasPorProdutoChart({
                 className="w-2 h-2 sm:w-3 sm:h-3 rounded-full mr-1 flex-shrink-0"
                 style={{ backgroundColor: colors[index % colors.length] }}
               />
-              <span className="text-xs sm:text-sm text-gray-600 truncate">
-                {item.produto}
-              </span>
+              <span className="text-xs sm:text-sm text-gray-600 truncate">{item.produto}</span>
             </div>
           ))}
         </div>

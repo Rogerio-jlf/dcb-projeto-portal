@@ -1,15 +1,10 @@
 "use client";
 
-import React from "react";
-import {
-  useReactTable,
-  getCoreRowModel,
-  flexRender,
-} from "@tanstack/react-table";
-import { DollarSign, AlertTriangle, AlertOctagon } from "lucide-react";
+import { ContasAPagarType } from "@/types/financeiro";
+import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
+import { AlertOctagon, AlertTriangle, DollarSign } from "lucide-react";
 import { colunasTabelaContasPagar } from "./Colunas_Tabela_Contas_Pagar";
 import { TabelaMobile } from "./Tabela_Mobile";
-import { ContasAPagarType } from "@/types/financeiro";
 
 interface TabelaContasPagarProps {
   dados: ContasAPagarType[];
@@ -61,10 +56,7 @@ export function TabelaContasPagar({ dados }: TabelaContasPagarProps) {
                           <div className="flex items-center space-x-2">
                             {header.isPlaceholder
                               ? null
-                              : flexRender(
-                                  header.column.columnDef.header,
-                                  header.getContext()
-                                )}
+                              : flexRender(header.column.columnDef.header, header.getContext())}
                           </div>
                         </th>
                       ))}
@@ -83,10 +75,7 @@ export function TabelaContasPagar({ dados }: TabelaContasPagarProps) {
                           }`}
                         >
                           <div className="flex items-center">
-                            {flexRender(
-                              cell.column.columnDef.cell,
-                              cell.getContext()
-                            )}
+                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
                           </div>
                         </td>
                       ))}
@@ -108,9 +97,7 @@ export function TabelaContasPagar({ dados }: TabelaContasPagarProps) {
             </p>
           </div>
         ) : (
-          table
-            .getRowModel()
-            .rows.map((row) => <TabelaMobile key={row.id} row={row} />)
+          table.getRowModel().rows.map((row) => <TabelaMobile key={row.id} row={row} />)
         )}
       </div>
 

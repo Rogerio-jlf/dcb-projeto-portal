@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import { X, Eye, EyeOff, Lock, Check, AlertCircle } from "lucide-react";
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
 import { useAuth } from "@/contexts/auth-context";
+import { useMutation } from "@tanstack/react-query";
+import { AlertCircle, Check, Eye, EyeOff, Lock, X } from "lucide-react";
+import React, { useState } from "react";
 import api from "../axios";
 
 interface PasswordData {
@@ -30,10 +29,7 @@ interface PasswordChangeModalProps {
   onSubmit: (passwordData: PasswordData) => Promise<void>;
 }
 
-const ModalAlterarSenha: React.FC<PasswordChangeModalProps> = ({
-  isOpen,
-  onClose,
-}) => {
+const ModalAlterarSenha: React.FC<PasswordChangeModalProps> = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState<PasswordData>({
     currentPassword: "",
     newPassword: "",
@@ -91,10 +87,7 @@ const ModalAlterarSenha: React.FC<PasswordChangeModalProps> = ({
     mutation.mutate(formData);
   };
 
-  const handleInputChange = (
-    field: keyof PasswordData,
-    value: string
-  ): void => {
+  const handleInputChange = (field: keyof PasswordData, value: string): void => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: undefined }));
@@ -124,9 +117,7 @@ const ModalAlterarSenha: React.FC<PasswordChangeModalProps> = ({
               <Lock className="w-5 h-5 text-emerald-400" />
             </div>
             <div>
-              <h2 className="text-xl font-semibold text-white">
-                Alterar Senha
-              </h2>
+              <h2 className="text-xl font-semibold text-white">Alterar Senha</h2>
               <p className="text-sm text-white/60">Mantenha sua conta segura</p>
             </div>
           </div>
@@ -142,16 +133,12 @@ const ModalAlterarSenha: React.FC<PasswordChangeModalProps> = ({
         <div className="p-6 space-y-6">
           {/* New Password */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-white/90">
-              Nova Senha
-            </label>
+            <label className="block text-sm font-medium text-white/90">Nova Senha</label>
             <div className="relative">
               <input
                 type={showPasswords.new ? "text" : "password"}
                 value={formData.newPassword}
-                onChange={(e) =>
-                  handleInputChange("newPassword", e.target.value)
-                }
+                onChange={(e) => handleInputChange("newPassword", e.target.value)}
                 className="w-full px-4 py-3 bg-white/10 border border-emerald-300/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all duration-300"
                 placeholder="nova senha"
               />
@@ -160,11 +147,7 @@ const ModalAlterarSenha: React.FC<PasswordChangeModalProps> = ({
                 onClick={() => togglePasswordVisibility("new")}
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/60 hover:text-white transition-colors"
               >
-                {showPasswords.new ? (
-                  <EyeOff className="w-5 h-5" />
-                ) : (
-                  <Eye className="w-5 h-5" />
-                )}
+                {showPasswords.new ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
               </button>
             </div>
             {errors.newPassword && (
@@ -177,16 +160,12 @@ const ModalAlterarSenha: React.FC<PasswordChangeModalProps> = ({
 
           {/* Confirm Password */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-white/90">
-              Confirmar Nova Senha
-            </label>
+            <label className="block text-sm font-medium text-white/90">Confirmar Nova Senha</label>
             <div className="relative">
               <input
                 type={showPasswords.confirm ? "text" : "password"}
                 value={formData.confirmPassword}
-                onChange={(e) =>
-                  handleInputChange("confirmPassword", e.target.value)
-                }
+                onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
                 className="w-full px-4 py-3 bg-white/10 border border-emerald-300/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all duration-300"
                 placeholder="confirmar senha"
               />

@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { SidebarActions } from "./Actions_Sidebar";
+import { SidebarFooter } from "./Footer_Sidebar";
 import { SidebarHeader } from "./Header_Sidebar";
 import { SidebarLinks } from "./Links_Sidebar";
-import { SidebarFooter } from "./Footer_Sidebar";
-import { SidebarActions } from "./Actions_Sidebar";
 
 export function SidebarNavegacao() {
   const pathname = usePathname();
@@ -54,11 +54,7 @@ export function SidebarNavegacao() {
         className={`
           fixed left-0 top-0 h-full z-50 transition-all duration-700 ease-out
           ${isCollapsed ? "w-20" : "w-72"}
-          ${
-            isMobileOpen
-              ? "translate-x-0"
-              : "-translate-x-full md:translate-x-0"
-          }
+          ${isMobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
         `}
       >
         {/* Background camadas */}
@@ -80,10 +76,7 @@ export function SidebarNavegacao() {
           <SidebarLinks isCollapsed={isCollapsed} />
 
           {/* Botões de ações (Alterar senha / Logout) */}
-          <SidebarActions
-            isCollapsed={isCollapsed}
-            expandSidebar={() => setIsCollapsed(false)}
-          />
+          <SidebarActions isCollapsed={isCollapsed} expandSidebar={() => setIsCollapsed(false)} />
 
           {/* Rodapé com redes sociais */}
           <SidebarFooter isCollapsed={isCollapsed} />
@@ -98,9 +91,7 @@ export function SidebarNavegacao() {
 
       {/* Spacer para conteúdo ao lado da sidebar */}
       <div
-        className={`hidden md:block transition-all duration-700 ${
-          isCollapsed ? "w-20" : "w-72"
-        }`}
+        className={`hidden md:block transition-all duration-700 ${isCollapsed ? "w-20" : "w-72"}`}
       />
     </>
   );

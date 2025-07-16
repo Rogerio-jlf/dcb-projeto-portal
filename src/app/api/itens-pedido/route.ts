@@ -12,7 +12,7 @@ export async function POST(request: Request) {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Basic ${Buffer.from(basicAuth).toString("base64")}`,
-      "tenantid": "01,0101"
+      tenantid: "01,0101",
     },
     body: JSON.stringify({
       CLIENTE: cliente,

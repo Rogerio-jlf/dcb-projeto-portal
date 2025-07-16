@@ -1,24 +1,20 @@
 "use client";
 
-import { CalendarDays, Filter, FileCode } from "lucide-react";
-import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
+import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Input } from "@/components/ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
   Select,
-  SelectTrigger,
   SelectContent,
   SelectItem,
+  SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { useFiltrosFinanceiro } from "@/contexts/filtros/financeiro";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
+import { CalendarDays, FileCode, Filter } from "lucide-react";
 
 export function FiltrosContasPagar() {
   const {
@@ -37,16 +33,12 @@ export function FiltrosContasPagar() {
     <div className="space-y-4">
       {/* TÍTULO MOBILE */}
       <div className="md:hidden bg-emerald-700 p-4 rounded-md shadow-md shadow-black">
-        <h2 className="text-2xl italic font-bold text-white text-left">
-          Contas a Pagar
-        </h2>
+        <h2 className="text-2xl italic font-bold text-white text-left">Contas a Pagar</h2>
       </div>
 
       {/* TÍTULO DESKTOP */}
       <div className="hidden md:flex items-center justify-between">
-        <h2 className="text-4xl italic font-bold text-gray-800">
-          Contas a Pagar
-        </h2>
+        <h2 className="text-4xl italic font-bold text-gray-800">Contas a Pagar</h2>
       </div>
 
       {/* FILTRO */}
@@ -68,10 +60,7 @@ export function FiltrosContasPagar() {
                   : "Selecionar data"}
               </Button>
             </PopoverTrigger>
-            <PopoverContent
-              className="p-0 bg-white shadow-md shadow-black"
-              align="start"
-            >
+            <PopoverContent className="p-0 bg-white shadow-md shadow-black" align="start">
               <Calendar
                 mode="single"
                 selected={dataInicio}
@@ -95,15 +84,10 @@ export function FiltrosContasPagar() {
                 variant="outline"
                 className="text-lg w-full justify-start text-left font-semibold text-gray-800 cursor-pointer italic shadow-md shadow-black hover:shadow-lg hover:shadow-black tracking-wider"
               >
-                {dataFim
-                  ? format(dataFim, "dd/MM/yyyy", { locale: ptBR })
-                  : "Selecionar data"}
+                {dataFim ? format(dataFim, "dd/MM/yyyy", { locale: ptBR }) : "Selecionar data"}
               </Button>
             </PopoverTrigger>
-            <PopoverContent
-              className="p-0 bg-white shadow-md shadow-black"
-              align="start"
-            >
+            <PopoverContent className="p-0 bg-white shadow-md shadow-black" align="start">
               <Calendar
                 mode="single"
                 selected={dataFim}

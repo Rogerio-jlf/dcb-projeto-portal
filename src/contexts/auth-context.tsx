@@ -1,13 +1,7 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  ReactNode,
-} from "react";
 import { useRouter } from "next/navigation";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
 type User = {
   cgc: string;
@@ -15,7 +9,6 @@ type User = {
   loja: string;
   nome: string;
   nomeReduzido: string;
-
 };
 
 type AuthContextType = {
@@ -41,10 +34,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(false);
   }, []);
 
-  const login = async (
-    login: string,
-    password: string
-  ): Promise<User | null> => {
+  const login = async (login: string, password: string): Promise<User | null> => {
     try {
       const response = await fetch("/api/auth/login", {
         method: "POST",
@@ -98,9 +88,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     isAuthenticated: !!user,
   };
 
-  return (
-    <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
 export function useAuth() {

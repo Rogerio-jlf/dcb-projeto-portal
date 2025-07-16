@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -15,10 +16,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Eye, Loader2 } from "lucide-react";
 import { PedidoType } from "@/types/pedido";
 import { useQuery } from "@tanstack/react-query";
+import { Eye, Loader2 } from "lucide-react";
 import { useState } from "react";
 
 interface ItemFormatado {
@@ -80,9 +80,7 @@ export const ModalItensPedido = ({ pedido }: ModalDetalhesPedidoProps) => {
     const pedidoEncontrado: PedidoComItens = data.dados[0];
 
     if (!pedidoEncontrado) {
-      throw new Error(
-        `Pedido ${pedido.C5_NUM} não encontrado na resposta da API`
-      );
+      throw new Error(`Pedido ${pedido.C5_NUM} não encontrado na resposta da API`);
     }
 
     return pedidoEncontrado.itens || [];
@@ -122,7 +120,6 @@ export const ModalItensPedido = ({ pedido }: ModalDetalhesPedidoProps) => {
         </Button>
       </DialogTrigger>
       <DialogContent className="md:min-w-[1500px] overflow-y-auto p-6 md:p-10 bg-white rounded-lg">
-
         <DialogHeader>
           <DialogTitle className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 text-center">
             Detalhes do Pedido #{pedido.C5_NUM}
@@ -167,9 +164,7 @@ export const ModalItensPedido = ({ pedido }: ModalDetalhesPedidoProps) => {
           ) : isError ? (
             <div className="flex justify-center items-center py-12">
               <div className="text-center">
-                <p className="text-red-500 font-semibold mb-2">
-                  {error?.message}
-                </p>
+                <p className="text-red-500 font-semibold mb-2">{error?.message}</p>
                 <Button onClick={() => refetch()} variant="outline" size="sm">
                   Tentar novamente
                 </Button>
@@ -184,35 +179,24 @@ export const ModalItensPedido = ({ pedido }: ModalDetalhesPedidoProps) => {
               {/* ✅ Mobile: Cards */}
               <div className="md:hidden space-y-4">
                 {itens.map((item, index) => (
-                  <div
-                    key={index}
-                    className="border rounded-lg p-4 shadow-sm bg-white"
-                  >
+                  <div key={index} className="border rounded-lg p-4 shadow-sm bg-white">
                     <p className="text-sm text-gray-500">
-                      <span className="font-semibold text-gray-700">
-                        Produto:
-                      </span>{" "}
-                      {item.produto} - {item.descricao}
+                      <span className="font-semibold text-gray-700">Produto:</span> {item.produto} -{" "}
+                      {item.descricao}
                     </p>
                     <p className="text-sm text-gray-500">
-                      <span className="font-semibold text-gray-700">
-                        Quantidade:
-                      </span>{" "}
+                      <span className="font-semibold text-gray-700">Quantidade:</span>{" "}
                       {item.quantidade}
                     </p>
                     <p className="text-sm text-gray-500">
-                      <span className="font-semibold text-gray-700">
-                        Valor Unitário:
-                      </span>{" "}
+                      <span className="font-semibold text-gray-700">Valor Unitário:</span>{" "}
                       {item.precoUnitario.toLocaleString("pt-BR", {
                         style: "currency",
                         currency: "BRL",
                       })}
                     </p>
                     <p className="text-sm text-gray-500">
-                      <span className="font-semibold text-gray-700">
-                        Desconto:
-                      </span>{" "}
+                      <span className="font-semibold text-gray-700">Desconto:</span>{" "}
                       {item.valorDesconto > 0
                         ? item.valorDesconto.toLocaleString("pt-BR", {
                             style: "currency",
@@ -221,9 +205,7 @@ export const ModalItensPedido = ({ pedido }: ModalDetalhesPedidoProps) => {
                         : "—"}
                     </p>
                     <p className="text-sm text-gray-500">
-                      <span className="font-semibold text-gray-700">
-                        Total:
-                      </span>{" "}
+                      <span className="font-semibold text-gray-700">Total:</span>{" "}
                       {item.valorTotal.toLocaleString("pt-BR", {
                         style: "currency",
                         currency: "BRL",

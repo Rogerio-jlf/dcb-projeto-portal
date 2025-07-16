@@ -1,14 +1,14 @@
 "use client";
 
+import { useAuth } from "@/contexts/auth-context";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-import { useAuth } from "@/contexts/auth-context";
-import HeaderLogin from "./Header_Login";
-import EmailInputLogin from "./Email_Input_Login";
-import PasswordInputLogin from "./Password_Input_Login";
-import CheckboxLogin from "./Checkbox_Login";
 import ButtonLogin from "./Button_Login";
+import CheckboxLogin from "./Checkbox_Login";
+import EmailInputLogin from "./Email_Input_Login";
+import HeaderLogin from "./Header_Login";
+import PasswordInputLogin from "./Password_Input_Login";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");

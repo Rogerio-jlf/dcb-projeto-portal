@@ -115,7 +115,7 @@
     border-color: var(--color-border);
     outline-color: color-mix(in oklab, var(--color-ring) 50%, transparent);
   }
-  
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);

@@ -1,23 +1,19 @@
 "use client";
 
-import { useState } from "react";
-import { CalendarDays, Filter, FileCode } from "lucide-react";
-import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
+import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
   Select,
-  SelectTrigger,
   SelectContent,
   SelectItem,
+  SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
+import { CalendarDays, FileCode, Filter } from "lucide-react";
+import { useState } from "react";
 
 export function FiltrosDashboard() {
   const [dataInicio, setDataInicio] = useState<Date | undefined>(undefined);
@@ -53,10 +49,7 @@ export function FiltrosDashboard() {
                   : "Selecionar data"}
               </Button>
             </PopoverTrigger>
-            <PopoverContent
-              className="p-0 bg-white shadow-md shadow-black"
-              align="start"
-            >
+            <PopoverContent className="p-0 bg-white shadow-md shadow-black" align="start">
               <Calendar
                 mode="single"
                 selected={dataInicio}
@@ -80,15 +73,10 @@ export function FiltrosDashboard() {
                 variant="outline"
                 className="w-full justify-start text-left font-semibold text-gray-600 cursor-pointer italic shadow-md shadow-black hover:shadow-lg hover:shadow-black"
               >
-                {dataFim
-                  ? format(dataFim, "dd/MM/yyyy", { locale: ptBR })
-                  : "Selecionar data"}
+                {dataFim ? format(dataFim, "dd/MM/yyyy", { locale: ptBR }) : "Selecionar data"}
               </Button>
             </PopoverTrigger>
-            <PopoverContent
-              className="p-0 bg-white shadow-md shadow-black"
-              align="start"
-            >
+            <PopoverContent className="p-0 bg-white shadow-md shadow-black" align="start">
               <Calendar
                 mode="single"
                 selected={dataFim}

@@ -1,7 +1,7 @@
 "use client";
+import { FileText, LayoutDashboard, Loader2, ShoppingCart } from "lucide-react";
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
-import { Loader2, LayoutDashboard, FileText, ShoppingCart } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface LinkItem {
@@ -90,12 +90,8 @@ export function SidebarLinks({ isCollapsed }: SidebarLinksProps) {
 
             {!isCollapsed && (
               <div className="ml-4 relative z-10 flex items-center justify-between flex-1">
-                <span className="tracking-wide whitespace-nowrap font-medium">
-                  {label}
-                </span>
-                {isLoading && (
-                  <Loader2 className="w-5 h-5 animate-spin text-white" />
-                )}
+                <span className="tracking-wide whitespace-nowrap font-medium">{label}</span>
+                {isLoading && <Loader2 className="w-5 h-5 animate-spin text-white" />}
               </div>
             )}
 

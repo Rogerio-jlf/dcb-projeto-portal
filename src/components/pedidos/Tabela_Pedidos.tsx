@@ -1,13 +1,8 @@
 "use client";
 
-import React from "react";
-import {
-  useReactTable,
-  getCoreRowModel,
-  flexRender,
-} from "@tanstack/react-table";
-import { colunasTabelaPedidos } from "./Colunas_Tabela_Pedidos";
 import { PedidoType } from "@/types/pedido";
+import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
+import { colunasTabelaPedidos } from "./Colunas_Tabela_Pedidos";
 import { TabelaMobile } from "./Tabela_Mobile";
 
 interface TabelaPedidosProps {
@@ -30,9 +25,7 @@ export function TabelaPedidos({ dados }: TabelaPedidosProps) {
         <div className="flex flex-col h-[80vh] overflow-hidden rounded-lg bg-white shadow-md shadow-black overflow-y-auto">
           {/* HEADER */}
           <div className="bg-black/80 p-4">
-            <h3 className="text-2xl font-semibold text-white tracking-wide italic">
-              Pedidos
-            </h3>
+            <h3 className="text-2xl font-semibold text-white tracking-wide italic">Pedidos</h3>
           </div>
 
           {/* Corpo com rolagem interna */}
@@ -57,10 +50,7 @@ export function TabelaPedidos({ dados }: TabelaPedidosProps) {
                           <div className="flex items-center space-x-2">
                             {header.isPlaceholder
                               ? null
-                              : flexRender(
-                                  header.column.columnDef.header,
-                                  header.getContext()
-                                )}
+                              : flexRender(header.column.columnDef.header, header.getContext())}
                           </div>
                         </th>
                       ))}
@@ -79,10 +69,7 @@ export function TabelaPedidos({ dados }: TabelaPedidosProps) {
                           }`}
                         >
                           <div className="flex items-center">
-                            {flexRender(
-                              cell.column.columnDef.cell,
-                              cell.getContext()
-                            )}
+                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
                           </div>
                         </td>
                       ))}
@@ -104,9 +91,7 @@ export function TabelaPedidos({ dados }: TabelaPedidosProps) {
             </p>
           </div>
         ) : (
-          table
-            .getRowModel()
-            .rows.map((row) => <TabelaMobile key={row.id} row={row} />)
+          table.getRowModel().rows.map((row) => <TabelaMobile key={row.id} row={row} />)
         )}
       </div>
     </>

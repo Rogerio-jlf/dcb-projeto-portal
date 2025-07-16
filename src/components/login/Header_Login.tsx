@@ -17,9 +17,7 @@ export default function Headerlogin() {
             className="w-20 h-20 object-cover"
           />
         </div>
-        <h2 className="text-white text-5xl font-bold font-orbitron tracking-wider mb-1">
-          DCB
-        </h2>
+        <h2 className="text-white text-5xl font-bold font-orbitron tracking-wider mb-1">DCB</h2>
         <p className="text-white text-xl font-semibold tracking-wider">
           Distribuidora Cirúrgica Brasileira
         </p>

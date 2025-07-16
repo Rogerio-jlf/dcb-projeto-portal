@@ -1,7 +1,7 @@
 "use client";
 
-import { Key, LogOut } from "lucide-react";
 import { logoutClient } from "@/lib/logout";
+import { Key, LogOut } from "lucide-react";
 import { useState } from "react";
 import ModalAlterarSenha from "./Modal_Alterar_Senha";
 
@@ -16,10 +16,7 @@ interface PasswordChangeData {
   confirmPassword: string;
 }
 
-export function SidebarActions({
-  isCollapsed,
-  expandSidebar,
-}: SidebarActionsProps) {
+export function SidebarActions({ isCollapsed, expandSidebar }: SidebarActionsProps) {
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
 
   const handlePasswordChange = async (passwordData: PasswordChangeData) => {

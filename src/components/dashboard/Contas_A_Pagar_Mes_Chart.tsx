@@ -1,15 +1,7 @@
 "use client";
 
-import {
-  PieChart,
-  Pie,
-  Cell,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  Label,
-} from "recharts";
 import { useScreenSize } from "@/hooks/useScreenSize"; // ajuste o path conforme sua estrutura
+import { Cell, Label, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
 interface Conta {
   name: string;
@@ -40,9 +32,7 @@ export function ContasPagarMesChart({ data }: { data: Conta[] }) {
           <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-800 uppercase italic tracking-wider">
             Contas a Pagar/Mês
           </h3>
-          <p className="text-base text-gray-600 font-semibold italic">
-            Distribuição por categoria
-          </p>
+          <p className="text-base text-gray-600 font-semibold italic">Distribuição por categoria</p>
         </div>
 
         <div className="bg-emerald-50 text-emerald-800 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium self-start sm:self-auto">
@@ -98,25 +88,25 @@ export function ContasPagarMesChart({ data }: { data: Conta[] }) {
               }
               itemStyle={{ fontWeight: "bold" }}
             />
-            {!screen.isMobile && data.map((entry, index) => (
-              
-              <Legend
-                key={`legend-${index}`}
-                layout="vertical"
-                verticalAlign="middle"
-                align="right"
-                iconSize={screen.legendIconSize}
-                iconType="circle"
-                wrapperStyle={{
-                  fontSize: screen.legendFontSize,
-                  paddingLeft: "10px",
-                }}
-              >
-                 <span className={`text-gray-600 ${screen.legendFontSize}`}>
+            {!screen.isMobile &&
+              data.map((entry, index) => (
+                <Legend
+                  key={`legend-${index}`}
+                  layout="vertical"
+                  verticalAlign="middle"
+                  align="right"
+                  iconSize={screen.legendIconSize}
+                  iconType="circle"
+                  wrapperStyle={{
+                    fontSize: screen.legendFontSize,
+                    paddingLeft: "10px",
+                  }}
+                >
+                  <span className={`text-gray-600 ${screen.legendFontSize}`}>
                     {data[index].name} - {Math.round((data[index].value / total) * 100)}%
                   </span>
-              </Legend>
-            ))}
+                </Legend>
+              ))}
           </PieChart>
         </ResponsiveContainer>
       </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Lock, Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Lock } from "lucide-react";
 
 interface LoginPasswordInputProps {
   value: string;
@@ -18,20 +18,14 @@ export default function PasswordInputLogin({
   return (
     <div className="space-y-2">
       <div className="flex justify-between items-center">
-        <label className="block text-lg font-semibold text-white tracking-wider">
-          Senha
-        </label>
+        <label className="block text-lg font-semibold text-white tracking-wider">Senha</label>
         <div className="relative group">
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
             className="text-base tracking-wider text-white hover:text-black flex items-center transition-colors duration-200 cursor-pointer"
           >
-            {showPassword ? (
-              <EyeOff className="w-7 h-7" />
-            ) : (
-              <Eye className="w-7 h-7" />
-            )}
+            {showPassword ? <EyeOff className="w-7 h-7" /> : <Eye className="w-7 h-7" />}
           </button>
 
           {/* Tooltip */}

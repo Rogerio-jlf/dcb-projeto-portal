@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { FaInstagram, FaFacebook, FaLinkedin } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 interface SidebarFooterProps {
   isCollapsed: boolean;
@@ -11,22 +11,19 @@ export function SidebarFooter({ isCollapsed }: SidebarFooterProps) {
     {
       href: "https://www.instagram.com/dcb_distribuidora/",
       icon: FaInstagram,
-      className:
-        "from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600",
+      className: "from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600",
       shadow: "hover:shadow-pink-500/30",
     },
     {
       href: "https://www.facebook.com/distribuidoracirurgicabrasileira/",
       icon: FaFacebook,
-      className:
-        "from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800",
+      className: "from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800",
       shadow: "hover:shadow-blue-500/30",
     },
     {
       href: "https://www.linkedin.com/company/dcb-distribuidora-cirurgica-brasileira",
       icon: FaLinkedin,
-      className:
-        "from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700",
+      className: "from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700",
       shadow: "hover:shadow-blue-500/30",
     },
   ];
@@ -51,12 +48,8 @@ export function SidebarFooter({ isCollapsed }: SidebarFooterProps) {
             ))}
           </div>
           <div className="text-center">
-            <p className="text-emerald-200/80 text-sm font-medium">
-              DCB Distribuidora
-            </p>
-            <p className="text-emerald-200/60 text-xs">
-              Cirúrgica Brasileira • Desde 1978
-            </p>
+            <p className="text-emerald-200/80 text-sm font-medium">DCB Distribuidora</p>
+            <p className="text-emerald-200/60 text-xs">Cirúrgica Brasileira • Desde 1978</p>
           </div>
         </div>
       ) : (
