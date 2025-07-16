@@ -11,7 +11,7 @@ export default function LayoutLogin() {
       <TextoLogin />
       <div className="relative z-10 w-full flex justify-end">
         <div className="min-h-screen flex items-center justify-center p-8 w-full md:w-1/2 lg:w-2/5">
-          <div className="w-full max-w-md transition-all duration-700 hover:scale-105">
+          <div className="w-full max-w-md">
             <FormLogin />
           </div>
         </div>

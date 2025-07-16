@@ -54,8 +54,8 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="bg-white/5 backdrop-blur-2xl rounded-2xl shadow-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300">
-      <div className="absolute top-0 left-0 right-0 h-1.5 bg-teal-400"></div>
+    <div className="bg-white/5 backdrop-blur-2xl rounded-lg shadow-xl shadow-black overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300">
+      <div className="absolute top-0 left-0 right-0 h-2 bg-teal-400"></div>
       <HeaderLogin />
       <form className="p-8" onSubmit={handleSubmit}>
         <div className="space-y-6">

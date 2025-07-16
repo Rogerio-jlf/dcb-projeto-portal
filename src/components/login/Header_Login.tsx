@@ -8,7 +8,7 @@ export default function Headerlogin() {
       <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 rounded-t-3xl"></div>
 
       <div className="relative z-10 text-center">
-        <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-emerald-400 to-cyan-400 rounded-full flex items-center justify-center shadow-lg">
+        <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-emerald-400 to-cyan-400 rounded-full flex items-center justify-center shadow-xl shadow-black">
           <Image
             src="/favicon_dcb.png"
             alt="Logo"
@@ -17,10 +17,10 @@ export default function Headerlogin() {
             className="w-20 h-20 object-cover"
           />
         </div>
-        <h2 className="text-emerald-950 text-4xl font-bold font-orbitron">
+        <h2 className="text-white text-5xl font-bold font-orbitron tracking-wider mb-1">
           DCB
         </h2>
-        <p className="text-emerald-950 text-xl font-semibold">
+        <p className="text-white text-xl font-semibold tracking-wider">
           Distribuidora Cirúrgica Brasileira
         </p>
       </div>

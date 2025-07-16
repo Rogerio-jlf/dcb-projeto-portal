@@ -8,22 +8,15 @@ export default function CheckboxLogin() {
           id="remember"
           name="remember"
           type="checkbox"
-          className="h-4 w-4 text-emerald-400 focus:ring-emerald-400 border-white/20 rounded bg-white/5 transition-all duration-200"
+          className="h-7 w-7 text-emerald-400 focus:ring-emerald-400 border-white/50 rounded bg-white/10 transition-all duration-200 cursor-pointer"
         />
         <label
           htmlFor="remember"
-          className="ml-2 block text-sm text-white/80 hover:text-white transition-colors cursor-pointer"
+          className="ml-2 block text-base italic text-white hover:text-black transition-colors cursor-pointer tracking-wider font-semibold"
         >
           Lembrar-me
         </label>
       </div>
-
-      <button
-        type="button"
-        className="text-sm text-white/70 hover:text-emerald-300 transition-colors duration-200 hover:underline"
-      >
-        Esqueceu a senha?
-      </button>
     </div>
   );
 }
