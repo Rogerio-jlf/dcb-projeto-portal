@@ -3,7 +3,7 @@
 import { useAuth } from "@/contexts/auth-context";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { toast } from "sonner";
+import { toast } from "react-toastify";
 import ButtonLogin from "./Button_Login";
 import CheckboxLogin from "./Checkbox_Login";
 import EmailInputLogin from "./Email_Input_Login";
@@ -15,7 +15,6 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
 
   const { login } = useAuth();
   const router = useRouter();
@@ -26,30 +25,69 @@ export default function LoginForm() {
 
     try {
       const userData = await login(email, password);
+
       if (userData) {
-        toast("Login realizado com sucesso", {
-          description: "Bem-vindo(a) de volta!",
-          duration: 3000,
-          icon: "✅",
-          style: { backgroundColor: "#38a169", color: "#fff" },
+        const toastId = toast.success("Login realizado com sucesso! Redirecionando, aguarde...", {
+          position: "top-right",
+          autoClose: false,
+          closeOnClick: false,
+          closeButton: false,
+          toastId: "login-toast",
+          theme: "dark",
+          style: {
+            fontSize: "20px",
+            fontWeight: "500",
+            borderRadius: "10px",
+            width: "400px",
+            maxWidth: "90%",
+            padding: "20px",
+          },
         });
+
+        localStorage.setItem("activeLoginToast", "true");
+
         router.push("/dashboard");
+
+        setTimeout(() => {
+          if (localStorage.getItem("activeLoginToast") === "true") {
+            toast.dismiss(toastId);
+            localStorage.removeItem("activeLoginToast");
+          }
+        }, 15000);
       } else {
-        toast("Erro ao realizar login", {
-          description: "Verifique suas credenciais e tente novamente.",
-          duration: 5000,
-          icon: "❌",
-          style: { backgroundColor: "#e53e3e", color: "#fff" },
+        toast.error("Erro ao realizar login. Verifique suas credenciais.", {
+          position: "top-right",
+          autoClose: 5000,
+          closeOnClick: false,
+          closeButton: false,
+          theme: "dark",
+          style: {
+            fontSize: "20px",
+            fontWeight: "500",
+            borderRadius: "10px",
+            width: "400px",
+            maxWidth: "90%",
+            padding: "20px",
+          },
         });
+        setIsLoading(false);
       }
     } catch {
-      toast("Erro ao realizar login", {
-        description: "Ocorreu um erro inesperado. Tente novamente.",
-        duration: 5000,
-        icon: "❌",
-        style: { backgroundColor: "#e53e3e", color: "#fff" },
+      toast.error("Ocorreu um erro inesperado. Tente novamente.", {
+        position: "top-right",
+        autoClose: 5000,
+        closeOnClick: false,
+        closeButton: false,
+        theme: "dark",
+        style: {
+          fontSize: "20px",
+          fontWeight: "500",
+          borderRadius: "10px",
+          width: "400px",
+          maxWidth: "90%",
+          padding: "20px",
+        },
       });
-    } finally {
       setIsLoading(false);
     }
   };

@@ -6,6 +6,9 @@ import { ContasPagarAnoChart } from "@/components/dashboard/Contas_A_Pagar_Ano_C
 import { ContasPagarMesChart } from "@/components/dashboard/Contas_A_Pagar_Mes_Chart";
 import { useState } from "react";
 
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+
 // import { TrendingUp, Package, Calendar } from "lucide-react";
 import { useAuth } from "@/contexts/auth-context";
 import { useFiltrosFinanceiro } from "@/contexts/filtros/financeiro";
@@ -132,6 +135,14 @@ export function DashboardLayout() {
   const [contasAPagarTot, setContasAPagarTot] = useState<any>([]);
 
   const [comprasPorProduto, setComprasProProduto] = useState([{ produto: "", valor: 0 }]);
+
+  // Efeito para fechar o toast de login ativo ao carregar a página
+  useEffect(() => {
+    if (localStorage.getItem("activeLoginToast") === "true") {
+      toast.dismiss("login-toast");
+      localStorage.removeItem("activeLoginToast");
+    }
+  }, []);
 
   return (
     <div className="flex h-screen">
