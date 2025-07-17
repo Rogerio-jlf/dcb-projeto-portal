@@ -25,9 +25,9 @@ export default function ButtonLogin({ isLoading }: LoginButtonProps) {
           <span className="flex items-center">
             Acessando
             <span className="ml-1 flex">
-              <span className="animate-bounce animation-delay-0">.</span>
-              <span className="animate-bounce animation-delay-150">.</span>
-              <span className="animate-bounce animation-delay-300">.</span>
+              <span className="animate-pulse animation-delay-0 text-4xl leading-none">.</span>
+              <span className="animate-pulse animation-delay-150 text-4xl leading-none">.</span>
+              <span className="animate-pulse animation-delay-300 text-4xl leading-none">.</span>
             </span>
           </span>
         </>
