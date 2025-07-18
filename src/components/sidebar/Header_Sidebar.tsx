@@ -1,5 +1,4 @@
 "use client";
-import { useUserData } from "@/hooks/useUserData";
 import { Activity, ChevronRight, Heart, Shield } from "lucide-react";
 import Image from "next/image";
 
@@ -10,8 +9,6 @@ interface SidebarHeaderProps {
 }
 
 export function SidebarHeader({ isCollapsed, toggleCollapse }: SidebarHeaderProps) {
-  const { data: userData, isLoading: userLoading } = useUserData();
-
   return (
     <>
       <div className="flex items-center justify-between p-6 border-b border-emerald-300/10">
@@ -56,7 +53,7 @@ export function SidebarHeader({ isCollapsed, toggleCollapse }: SidebarHeaderProp
               <span className="text-cyan-300 text-xs font-medium block">Bem-vindo,</span>
 
               <span className="text-cyan-300 text-sm block">
-                {userLoading ? "Carregando usuário..." : (userData?.nome ?? "Usuário")}
+                {/* {userLoading ? "Carregando usuário..." : (userData?.nome ?? "Usuário")} */}
               </span>
             </div>
           </div>

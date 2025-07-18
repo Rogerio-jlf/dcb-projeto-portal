@@ -1,8 +1,6 @@
-import { useAuth } from "@/contexts/auth-context";
-import { useMutation } from "@tanstack/react-query";
+// import { useAuth } from "@/contexts/auth-context";
 import { AlertCircle, Check, Eye, EyeOff, Lock, X } from "lucide-react";
 import React, { useState } from "react";
-import api from "../axios";
 
 interface PasswordData {
   currentPassword: string;
@@ -45,47 +43,7 @@ const ModalAlterarSenha: React.FC<PasswordChangeModalProps> = ({ isOpen, onClose
   const [errors, setErrors] = useState<ValidationErrors>({});
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const { user } = useAuth();
-
-  const mutation = useMutation({
-    mutationFn: async (passwordData: PasswordData) =>
-      api.post("/api/auth/change-password", {
-        LOGIN: user?.cgc,
-        SENHA: passwordData.newPassword,
-      }),
-    onSuccess: () => {
-      setErrors({});
-      onClose();
-    },
-    onError: (error: Error) => {
-      setErrors({ submit: error.message });
-    },
-  });
-
-  const validateForm = (): boolean => {
-    const newErrors: ValidationErrors = {};
-
-    if (!formData.newPassword) {
-      newErrors.newPassword = "Nova senha é obrigatória";
-    } else if (formData.newPassword.length < 5) {
-      newErrors.newPassword = "Nova senha deve ter pelo menos 5 caracteres";
-    }
-
-    if (!formData.confirmPassword) {
-      newErrors.confirmPassword = "Confirmação de senha é obrigatória";
-    } else if (formData.newPassword !== formData.confirmPassword) {
-      newErrors.confirmPassword = "As senhas não coincidem";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = async (): Promise<void> => {
-    if (!validateForm()) return;
-
-    mutation.mutate(formData);
-  };
+  // const { user } = useAuth();
 
   const handleInputChange = (field: keyof PasswordData, value: string): void => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -219,8 +177,6 @@ const ModalAlterarSenha: React.FC<PasswordChangeModalProps> = ({ isOpen, onClose
             </button>
             <button
               type="button"
-              onClick={handleSubmit}
-              disabled={isSubmitting}
               className="flex-1 px-4 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-lg hover:from-emerald-600 hover:to-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2"
             >
               {isSubmitting ? (

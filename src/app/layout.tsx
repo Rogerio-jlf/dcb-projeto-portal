@@ -1,9 +1,6 @@
-import QueryClienteProviderComponent from "@/components/query-cliente/Query_Cliente_Provider";
-import { AuthProvider } from "@/contexts/auth-context";
 import type { Metadata } from "next";
 import { Kodchasan, Orbitron } from "next/font/google";
 import { ToastContainer } from "react-toastify";
-// import { Toaster } from "sonner";
 import "./globals.css";
 
 const kodchasan = Kodchasan({
@@ -34,10 +31,8 @@ export default function RootLayout({
         <link rel="icon" href="/favicon_dcb.png" type="image/png" />
       </head>
       <body className={`${kodchasan.variable} ${orbitron.variable} antialiased`}>
-        <QueryClienteProviderComponent>
-          <ToastContainer />
-          <AuthProvider>{children}</AuthProvider>
-        </QueryClienteProviderComponent>
+        <ToastContainer />
+        {children}
       </body>
     </html>
   );

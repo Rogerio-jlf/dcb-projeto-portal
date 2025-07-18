@@ -1,6 +1,5 @@
 "use client";
 
-import { logoutClient } from "@/lib/logout";
 import { Key, LogOut } from "lucide-react";
 import { useState } from "react";
 import ModalAlterarSenha from "./Modal_Alterar_Senha";
@@ -61,7 +60,6 @@ export function SidebarActions({ isCollapsed, expandSidebar }: SidebarActionsPro
       icon: LogOut,
       label: "Fazer Logout",
       color: "text-red-400",
-      onClick: logoutClient,
     },
   ];
 
