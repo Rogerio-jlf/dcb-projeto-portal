@@ -12,15 +12,15 @@ export function TabelaMobile({ row }: Props) {
   const actionCell = allCells.find((cell) => cell.column.id === "acoes");
 
   return (
-    <div className="bg-white rounded-lg shadow-sm shadow-black p-2 border border-gray-200 space-y-2 mb-6">
+    <div className="mb-6 space-y-2 rounded-lg border border-gray-200 bg-white p-2 shadow-sm shadow-black">
       {contentCells.map((cell) => (
         <div key={cell.id}>
           {/* TÍTULO */}
-          <p className="text-xs text-gray-700 italic font-semibold uppercase tracking-wide">
+          <p className="text-xs font-semibold tracking-wide text-gray-700 uppercase italic">
             {cell.column.columnDef.header as string}
           </p>
           {/* VALOR */}
-          <p className="text-sm text-gray-800 font-bold italic tracking-wide">
+          <p className="text-sm font-bold tracking-wide text-gray-800 italic">
             {cell.renderValue() as string}
           </p>
           <hr className="my-2 border-dashed border-gray-300" />
@@ -29,7 +29,10 @@ export function TabelaMobile({ row }: Props) {
 
       {actionCell && (
         <div className="flex justify-end pt-2">
-          {flexRender(actionCell.column.columnDef.cell, actionCell.getContext())}
+          {flexRender(
+            actionCell.column.columnDef.cell,
+            actionCell.getContext()
+          )}
         </div>
       )}
     </div>

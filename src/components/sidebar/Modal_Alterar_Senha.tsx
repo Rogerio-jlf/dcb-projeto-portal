@@ -27,7 +27,10 @@ interface PasswordChangeModalProps {
   onSubmit: (passwordData: PasswordData) => Promise<void>;
 }
 
-const ModalAlterarSenha: React.FC<PasswordChangeModalProps> = ({ isOpen, onClose }) => {
+const ModalAlterarSenha: React.FC<PasswordChangeModalProps> = ({
+  isOpen,
+  onClose,
+}) => {
   const [formData, setFormData] = useState<PasswordData>({
     currentPassword: "",
     newPassword: "",
@@ -45,7 +48,10 @@ const ModalAlterarSenha: React.FC<PasswordChangeModalProps> = ({ isOpen, onClose
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   // const { user } = useAuth();
 
-  const handleInputChange = (field: keyof PasswordData, value: string): void => {
+  const handleInputChange = (
+    field: keyof PasswordData,
+    value: string
+  ): void => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: undefined }));
@@ -66,51 +72,61 @@ const ModalAlterarSenha: React.FC<PasswordChangeModalProps> = ({ isOpen, onClose
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-      <div className="bg-gradient-to-br from-slate-900 to-emerald-900 rounded-2xl border border-emerald-300/20 shadow-2xl max-w-md w-full animate-in zoom-in-95 duration-300">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
+      <div className="animate-in zoom-in-95 w-full max-w-md rounded-2xl border border-emerald-300/20 bg-gradient-to-br from-slate-900 to-emerald-900 shadow-2xl duration-300">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-emerald-300/20">
+        <div className="flex items-center justify-between border-b border-emerald-300/20 p-6">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-500/20 rounded-lg">
-              <Lock className="w-5 h-5 text-emerald-400" />
+            <div className="rounded-lg bg-emerald-500/20 p-2">
+              <Lock className="h-5 w-5 text-emerald-400" />
             </div>
             <div>
-              <h2 className="text-xl font-semibold text-white">Alterar Senha</h2>
+              <h2 className="text-xl font-semibold text-white">
+                Alterar Senha
+              </h2>
               <p className="text-sm text-white/60">Mantenha sua conta segura</p>
             </div>
           </div>
           <button
             onClick={handleClose}
-            className="p-2 hover:bg-white/10 rounded-lg transition-colors duration-200"
+            className="rounded-lg p-2 transition-colors duration-200 hover:bg-white/10"
           >
-            <X className="w-5 h-5 text-white/60" />
+            <X className="h-5 w-5 text-white/60" />
           </button>
         </div>
 
         {/* Form */}
-        <div className="p-6 space-y-6">
+        <div className="space-y-6 p-6">
           {/* New Password */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-white/90">Nova Senha</label>
+            <label className="block text-sm font-medium text-white/90">
+              Nova Senha
+            </label>
             <div className="relative">
               <input
                 type={showPasswords.new ? "text" : "password"}
                 value={formData.newPassword}
-                onChange={(e) => handleInputChange("newPassword", e.target.value)}
-                className="w-full px-4 py-3 bg-white/10 border border-emerald-300/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all duration-300"
+                onChange={(e) =>
+                  handleInputChange("newPassword", e.target.value)
+                }
+                className="w-full rounded-lg border border-emerald-300/20 bg-white/10 px-4 py-3 text-white placeholder-white/40 transition-all duration-300 focus:border-transparent focus:ring-2 focus:ring-emerald-400 focus:outline-none"
                 placeholder="nova senha"
               />
               <button
                 type="button"
                 onClick={() => togglePasswordVisibility("new")}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/60 hover:text-white transition-colors"
+                className="absolute top-1/2 right-3 -translate-y-1/2 transform text-white/60 transition-colors hover:text-white"
               >
-                {showPasswords.new ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                {showPasswords.new ? (
+                  <EyeOff className="h-5 w-5" />
+                ) : (
+                  <Eye className="h-5 w-5" />
+                )}
               </button>
             </div>
             {errors.newPassword && (
-              <p className="text-red-400 text-sm flex items-center gap-1">
-                <AlertCircle className="w-4 h-4" />
+              <p className="flex items-center gap-1 text-sm text-red-400">
+                <AlertCircle className="h-4 w-4" />
                 {errors.newPassword}
               </p>
             )}
@@ -118,30 +134,34 @@ const ModalAlterarSenha: React.FC<PasswordChangeModalProps> = ({ isOpen, onClose
 
           {/* Confirm Password */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-white/90">Confirmar Nova Senha</label>
+            <label className="block text-sm font-medium text-white/90">
+              Confirmar Nova Senha
+            </label>
             <div className="relative">
               <input
                 type={showPasswords.confirm ? "text" : "password"}
                 value={formData.confirmPassword}
-                onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
-                className="w-full px-4 py-3 bg-white/10 border border-emerald-300/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all duration-300"
+                onChange={(e) =>
+                  handleInputChange("confirmPassword", e.target.value)
+                }
+                className="w-full rounded-lg border border-emerald-300/20 bg-white/10 px-4 py-3 text-white placeholder-white/40 transition-all duration-300 focus:border-transparent focus:ring-2 focus:ring-emerald-400 focus:outline-none"
                 placeholder="confirmar senha"
               />
               <button
                 type="button"
                 onClick={() => togglePasswordVisibility("confirm")}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/60 hover:text-white transition-colors"
+                className="absolute top-1/2 right-3 -translate-y-1/2 transform text-white/60 transition-colors hover:text-white"
               >
                 {showPasswords.confirm ? (
-                  <EyeOff className="w-5 h-5" />
+                  <EyeOff className="h-5 w-5" />
                 ) : (
-                  <Eye className="w-5 h-5" />
+                  <Eye className="h-5 w-5" />
                 )}
               </button>
             </div>
             {errors.confirmPassword && (
-              <p className="text-red-400 text-sm flex items-center gap-1">
-                <AlertCircle className="w-4 h-4" />
+              <p className="flex items-center gap-1 text-sm text-red-400">
+                <AlertCircle className="h-4 w-4" />
                 {errors.confirmPassword}
               </p>
             )}
@@ -149,39 +169,39 @@ const ModalAlterarSenha: React.FC<PasswordChangeModalProps> = ({ isOpen, onClose
 
           {/* Submit Error */}
           {errors.submit && (
-            <p className="text-red-400 text-sm flex items-center gap-1">
-              <AlertCircle className="w-4 h-4" />
+            <p className="flex items-center gap-1 text-sm text-red-400">
+              <AlertCircle className="h-4 w-4" />
               {errors.submit}
             </p>
           )}
 
           {/* Password Requirements */}
-          <div className="bg-emerald-500/10 border border-emerald-300/20 rounded-lg p-3">
-            <p className="text-sm text-white/80 mb-2">Requisitos da senha:</p>
-            <ul className="text-xs text-white/60 space-y-1">
+          <div className="rounded-lg border border-emerald-300/20 bg-emerald-500/10 p-3">
+            <p className="mb-2 text-sm text-white/80">Requisitos da senha:</p>
+            <ul className="space-y-1 text-xs text-white/60">
               <li className="flex items-center gap-2">
-                <Check className="w-3 h-3 text-emerald-400" />
+                <Check className="h-3 w-3 text-emerald-400" />
                 Mínimo de 5 caracteres
               </li>
             </ul>
           </div>
 
           {/* Actions */}
-          <div className="flex flex-col column gap-3 pt-4">
+          <div className="column flex flex-col gap-3 pt-4">
             <button
               type="button"
               onClick={handleClose}
-              className="flex-1 px-4 py-3 border border-white/20 rounded-lg text-white/80 hover:bg-white/10 transition-all duration-300 hover:scale-[1.02] active:scale-95"
+              className="flex-1 rounded-lg border border-white/20 px-4 py-3 text-white/80 transition-all duration-300 hover:scale-[1.02] hover:bg-white/10 active:scale-95"
             >
               Cancelar
             </button>
             <button
               type="button"
-              className="flex-1 px-4 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-lg hover:from-emerald-600 hover:to-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2"
+              className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-emerald-500 to-emerald-600 px-4 py-3 text-white transition-all duration-300 hover:scale-[1.02] hover:from-emerald-600 hover:to-emerald-700 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isSubmitting ? (
                 <>
-                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white"></div>
                   Alterando...
                 </>
               ) : (

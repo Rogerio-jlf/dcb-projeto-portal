@@ -53,17 +53,17 @@ export function LayoutPedidos() {
       <SidebarNavegacao />
 
       {/* Área principal com layout vertical */}
-      <main className="flex-1 h-screen flex flex-col relative bg-white">
+      <main className="relative flex h-screen flex-1 flex-col bg-white">
         <div className="flex-shrink-0">
-          <div className="px-4 md:px-6 lg:px-8 py-4">
+          <div className="px-4 py-4 md:px-6 lg:px-8">
             <div className="space-y-4">
               <FiltrosPedidos />
 
               {isLoading ? (
                 // ✅ LOADING GRANDE E CENTRALIZADO
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/70 z-50">
-                  <Loader2 className="w-16 h-16 text-emerald-600 animate-spin" />
-                  <p className="mt-4 text-lg font-semibold text-emerald-700 animate-pulse">
+                <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-white/70">
+                  <Loader2 className="h-16 w-16 animate-spin text-emerald-600" />
+                  <p className="mt-4 animate-pulse text-lg font-semibold text-emerald-700">
                     Carregando pedidos, aguarde...
                   </p>
                 </div>

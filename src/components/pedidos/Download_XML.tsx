@@ -43,7 +43,8 @@ export default function DownloadXml({ pedido }: { pedido: PedidoType }) {
     onError: (error: AxiosError) => {
       toast.dismiss();
       toast.error("Erro ao gerar XML", {
-        description: (error?.response?.data as { error?: string })?.error ?? error.message,
+        description:
+          (error?.response?.data as { error?: string })?.error ?? error.message,
         duration: 3000,
         icon: "❌",
         style: {
@@ -78,7 +79,7 @@ export default function DownloadXml({ pedido }: { pedido: PedidoType }) {
       <Button
         variant="ghost"
         size="sm"
-        className="text-red-500 hover:bg-blue-100 hover:text-blue-700 transition-colors"
+        className="text-red-500 transition-colors hover:bg-blue-100 hover:text-blue-700"
         aria-label={`Download do xml`}
       >
         <FileDown style={{ width: 24, height: 24 }} />

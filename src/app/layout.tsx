@@ -28,9 +28,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon_dcb.png" type="image/png" />
+        <link
+          rel="icon"
+          href="/favicon_dcb.png"
+          type="image/png"
+        />
       </head>
-      <body className={`${kodchasan.variable} ${orbitron.variable} antialiased`}>
+      <body
+        className={`${kodchasan.variable} ${orbitron.variable} antialiased`}
+      >
         <ToastContainer />
         {children}
       </body>

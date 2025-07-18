@@ -1,4 +1,5 @@
 import { FlatCompat } from "@eslint/eslintrc";
+import prettierPlugin from "eslint-plugin-prettier";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -9,6 +10,29 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-const eslintConfig = [...compat.extends("next/core-web-vitals", "next/typescript")];
+export default [
+  // ✅ Regras padrão do Next.js com TypeScript
+  ...compat.extends("next/core-web-vitals", "next/typescript"),
 
-export default eslintConfig;
+  // ✅ Integração com Prettier (Flat Config)
+  {
+    files: ["**/*.{js,ts,jsx,tsx}"],
+    plugins: {
+      prettier: prettierPlugin,
+    },
+    rules: {
+      "prettier/prettier": [
+        "error",
+        {
+          singleQuote: false,
+          semi: true,
+          printWidth: 80,
+          tabWidth: 2,
+          trailingComma: "es5",
+          endOfLine: "auto",
+          singleAttributePerLine: true,
+        },
+      ],
+    },
+  },
+];

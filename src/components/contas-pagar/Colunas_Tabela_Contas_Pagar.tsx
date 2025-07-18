@@ -43,23 +43,24 @@ export const StatusBadge = ({ status }: { status: string }) => {
     },
   };
 
-  const config = configs[status.toUpperCase() as keyof typeof configs] || configs["1"];
+  const config =
+    configs[status.toUpperCase() as keyof typeof configs] || configs["1"];
   const Icon = config.icon;
 
   return (
     <>
-      <div className="hidden md:flex justify-center">
+      <div className="hidden justify-center md:flex">
         <div
-          className={`flex items-center gap-2 p-2 rounded-full text-base font-semibold italic tracking-wider ${config.style}`}
+          className={`flex items-center gap-2 rounded-full p-2 text-base font-semibold tracking-wider italic ${config.style}`}
         >
-          <Icon className="w-5 h-5" />
+          <Icon className="h-5 w-5" />
           {ContasAPagarStatus[status] || "Status Desconhecido"}
         </div>
       </div>
 
-      <div className="md:hidden flex items-center gap-2">
-        <div className={`p-2 rounded-full ${config.bgMobile} border`}>
-          <Icon className={`w-5 h-5 ${config.textMobile}`} />
+      <div className="flex items-center gap-2 md:hidden">
+        <div className={`rounded-full p-2 ${config.bgMobile} border`}>
+          <Icon className={`h-5 w-5 ${config.textMobile}`} />
         </div>
         <span className={`text-sm font-semibold ${config.textMobile}`}>
           {ContasAPagarStatus[status] || "Status Desconhecido"}
@@ -80,7 +81,7 @@ export const colunasTabelaContasPagar: ColumnDef<ContasAPagarType>[] = [
     accessorKey: "E1_NUM",
     header: "Nota Fiscal",
     cell: ({ getValue }) => (
-      <div className="font-semibold text-lg text-gray-800 italic tracking-wider">
+      <div className="text-lg font-semibold tracking-wider text-gray-800 italic">
         {String(getValue())}
       </div>
     ),
@@ -94,14 +95,14 @@ export const colunasTabelaContasPagar: ColumnDef<ContasAPagarType>[] = [
       const match = date.match(/(\d{4})(\d{2})(\d{2})/);
       if (!match) {
         return (
-          <div className="font-semibold text-lg text-gray-800 italic tracking-wider">
+          <div className="text-lg font-semibold tracking-wider text-gray-800 italic">
             Data Inválida
           </div>
         );
       }
       const [, year, month, day] = match;
       return (
-        <div className="font-semibold text-lg text-gray-800 italic tracking-wider">{`${day}/${month}/${year}`}</div>
+        <div className="text-lg font-semibold tracking-wider text-gray-800 italic">{`${day}/${month}/${year}`}</div>
       );
     },
   },
@@ -114,7 +115,7 @@ export const colunasTabelaContasPagar: ColumnDef<ContasAPagarType>[] = [
       const match = date.match(/(\d{4})(\d{2})(\d{2})/);
       if (!match) {
         return (
-          <div className="font-semibold text-lg text-gray-800 italic tracking-wider">
+          <div className="text-lg font-semibold tracking-wider text-gray-800 italic">
             Data Inválida
           </div>
         );
@@ -124,12 +125,16 @@ export const colunasTabelaContasPagar: ColumnDef<ContasAPagarType>[] = [
       return (
         <div
           className={`${
-            isOverdue ? "text-red-500 font-semibold text-lg italic tracking-wider" : ""
+            isOverdue
+              ? "text-lg font-semibold tracking-wider text-red-500 italic"
+              : ""
           }`}
         >
           {`${day}/${month}/${year}`}
           {isOverdue && (
-            <div className="text-sm text-red-500 italic font-semibold tracking-wider">Vencido</div>
+            <div className="text-sm font-semibold tracking-wider text-red-500 italic">
+              Vencido
+            </div>
           )}
         </div>
       );
@@ -140,7 +145,7 @@ export const colunasTabelaContasPagar: ColumnDef<ContasAPagarType>[] = [
     accessorKey: "E1_VALOR",
     header: "Valor",
     cell: ({ getValue }) => (
-      <div className="font-semibold text-lg text-gray-800 italic tracking-wider">
+      <div className="text-lg font-semibold tracking-wider text-gray-800 italic">
         {Number(getValue()).toLocaleString("pt-BR", {
           style: "currency",
           currency: "BRL",
@@ -156,7 +161,7 @@ export const colunasTabelaContasPagar: ColumnDef<ContasAPagarType>[] = [
       const valor = Number(getValue());
       return (
         <div
-          className={`font-semibold text-lg italic tracking-wider ${
+          className={`text-lg font-semibold tracking-wider italic ${
             valor > 0 ? "text-red-500" : "text-gray-800"
           }`}
         >
@@ -175,7 +180,9 @@ export const colunasTabelaContasPagar: ColumnDef<ContasAPagarType>[] = [
     cell: ({ getValue }) => {
       const valor = Number(getValue());
       return (
-        <div className={`font-bold italic ${valor > 0 ? "text-red-500" : "text-gray-800"}`}>
+        <div
+          className={`font-bold italic ${valor > 0 ? "text-red-500" : "text-gray-800"}`}
+        >
           {valor.toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",

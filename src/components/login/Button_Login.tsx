@@ -11,23 +11,29 @@ export default function ButtonLogin({ isLoading }: LoginButtonProps) {
     <button
       type="submit"
       disabled={isLoading}
-      className="w-full flex justify-center tracking-wider italic items-center py-4 px-6 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white rounded-lg text-2xl font-medium hover:from-emerald-600 hover:to-cyan-600 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 focus:ring-offset-transparent transform hover:scale-105 hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed active:scale-90 relative overflow-hidden"
+      className="relative flex w-full transform items-center justify-center overflow-hidden rounded-lg bg-gradient-to-r from-emerald-500 to-cyan-500 px-6 py-4 text-2xl font-medium tracking-wider text-white italic transition-all duration-300 hover:scale-105 hover:from-emerald-600 hover:to-cyan-600 hover:shadow-2xl focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 focus:ring-offset-transparent focus:outline-none active:scale-90 disabled:cursor-not-allowed disabled:opacity-50"
     >
       {isLoading ? (
         <>
           {/* Loading spinner customizado */}
           <div className="relative mr-2">
-            <div className="w-7 h-7 border-3 border-white/30 border-t-white rounded-full animate-spin"></div>
-            <div className="absolute inset-0 w-7 h-7 border-3 border-transparent border-t-white/60 rounded-full animate-spin animation-delay-150"></div>
+            <div className="h-7 w-7 animate-spin rounded-full border-3 border-white/30 border-t-white"></div>
+            <div className="animation-delay-150 absolute inset-0 h-7 w-7 animate-spin rounded-full border-3 border-transparent border-t-white/60"></div>
           </div>
 
           {/* Texto com animação */}
           <span className="flex items-center">
             Acessando
             <span className="ml-1 flex">
-              <span className="animate-pulse animation-delay-0 text-4xl leading-none">.</span>
-              <span className="animate-pulse animation-delay-150 text-4xl leading-none">.</span>
-              <span className="animate-pulse animation-delay-300 text-4xl leading-none">.</span>
+              <span className="animation-delay-0 animate-pulse text-4xl leading-none">
+                .
+              </span>
+              <span className="animation-delay-150 animate-pulse text-4xl leading-none">
+                .
+              </span>
+              <span className="animation-delay-300 animate-pulse text-4xl leading-none">
+                .
+              </span>
             </span>
           </span>
         </>
@@ -39,7 +45,7 @@ export default function ButtonLogin({ isLoading }: LoginButtonProps) {
 
       {/* Efeito shimmer durante loading */}
       {isLoading && (
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer -skew-x-12"></div>
+        <div className="animate-shimmer absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
       )}
     </button>
   );

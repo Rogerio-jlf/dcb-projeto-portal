@@ -80,7 +80,9 @@ export const ModalItensPedido = ({ pedido }: ModalDetalhesPedidoProps) => {
     const pedidoEncontrado: PedidoComItens = data.dados[0];
 
     if (!pedidoEncontrado) {
-      throw new Error(`Pedido ${pedido.C5_NUM} não encontrado na resposta da API`);
+      throw new Error(
+        `Pedido ${pedido.C5_NUM} não encontrado na resposta da API`
+      );
     }
 
     return pedidoEncontrado.itens || [];
@@ -108,48 +110,51 @@ export const ModalItensPedido = ({ pedido }: ModalDetalhesPedidoProps) => {
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog
+      open={isOpen}
+      onOpenChange={setIsOpen}
+    >
       <DialogTrigger asChild>
         <Button
           variant="ghost"
           size="sm"
-          className="text-blue-500 hover:bg-blue-100 hover:text-blue-700 transition-colors"
+          className="text-blue-500 transition-colors hover:bg-blue-100 hover:text-blue-700"
           aria-label={`Detalhes do pedido ${pedido.C5_NUM}`}
         >
           <Eye style={{ width: 28, height: 28 }} />
         </Button>
       </DialogTrigger>
-      <DialogContent className="md:min-w-[1500px] overflow-y-auto p-6 md:p-10 bg-white rounded-lg">
+      <DialogContent className="overflow-y-auto rounded-lg bg-white p-6 md:min-w-[1500px] md:p-10">
         <DialogHeader>
-          <DialogTitle className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 text-center">
+          <DialogTitle className="mb-6 text-center text-2xl font-bold text-gray-800 md:text-3xl">
             Detalhes do Pedido #{pedido.C5_NUM}
           </DialogTitle>
         </DialogHeader>
 
         <div className="space-y-6">
           {/* VALORES DA API */}
-          <div className="grid grid-cols-1 md:grid-cols-3 p-4 md:p-6 bg-gray-100 rounded-lg place-items-center text-center gap-2 md:gap-4">
+          <div className="grid grid-cols-1 place-items-center gap-2 rounded-lg bg-gray-100 p-4 text-center md:grid-cols-3 md:gap-4 md:p-6">
             <div>
-              <p className="text-sm md:text-base font-semibold italic text-gray-800 mb-1 tracking-wider">
+              <p className="mb-1 text-sm font-semibold tracking-wider text-gray-800 italic md:text-base">
                 Data do pedido:
               </p>
-              <p className="font-semibold text-gray-800 text-base md:text-lg italic tracking-wider">
+              <p className="text-base font-semibold tracking-wider text-gray-800 italic md:text-lg">
                 {formatarData(pedido.C5_EMISSAO)}
               </p>
             </div>
             <div>
-              <p className="text-sm md:text-base font-semibold italic text-gray-800 mb-1 tracking-wider">
+              <p className="mb-1 text-sm font-semibold tracking-wider text-gray-800 italic md:text-base">
                 Status do pedido:
               </p>
-              <p className="font-semibold text-gray-800 text-base md:text-lg italic tracking-wider">
+              <p className="text-base font-semibold tracking-wider text-gray-800 italic md:text-lg">
                 {pedido.STATUS}
               </p>
             </div>
             <div>
-              <p className="text-sm md:text-base font-semibold italic text-gray-800 mb-1 tracking-wider">
+              <p className="mb-1 text-sm font-semibold tracking-wider text-gray-800 italic md:text-base">
                 Quantidade de itens:
               </p>
-              <p className="font-semibold text-gray-800 text-base md:text-lg italic tracking-wider">
+              <p className="text-base font-semibold tracking-wider text-gray-800 italic md:text-lg">
                 {itens.length > 0 ? itens.length : "Nenhum item encontrado"}
               </p>
             </div>
@@ -157,46 +162,63 @@ export const ModalItensPedido = ({ pedido }: ModalDetalhesPedidoProps) => {
 
           {/* LOADING / ERROR / TABELA */}
           {isLoading ? (
-            <div className="flex justify-center items-center py-12">
-              <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
+            <div className="flex items-center justify-center py-12">
+              <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
               <span className="ml-2 text-gray-600">Carregando itens...</span>
             </div>
           ) : isError ? (
-            <div className="flex justify-center items-center py-12">
+            <div className="flex items-center justify-center py-12">
               <div className="text-center">
-                <p className="text-red-500 font-semibold mb-2">{error?.message}</p>
-                <Button onClick={() => refetch()} variant="outline" size="sm">
+                <p className="mb-2 font-semibold text-red-500">
+                  {error?.message}
+                </p>
+                <Button
+                  onClick={() => refetch()}
+                  variant="outline"
+                  size="sm"
+                >
                   Tentar novamente
                 </Button>
               </div>
             </div>
           ) : itens.length === 0 ? (
-            <div className="text-center py-8 text-gray-500 font-medium">
+            <div className="py-8 text-center font-medium text-gray-500">
               Nenhum item encontrado para este pedido
             </div>
           ) : (
             <>
               {/* ✅ Mobile: Cards */}
-              <div className="md:hidden space-y-4">
+              <div className="space-y-4 md:hidden">
                 {itens.map((item, index) => (
-                  <div key={index} className="border rounded-lg p-4 shadow-sm bg-white">
+                  <div
+                    key={index}
+                    className="rounded-lg border bg-white p-4 shadow-sm"
+                  >
                     <p className="text-sm text-gray-500">
-                      <span className="font-semibold text-gray-700">Produto:</span> {item.produto} -{" "}
-                      {item.descricao}
+                      <span className="font-semibold text-gray-700">
+                        Produto:
+                      </span>{" "}
+                      {item.produto} - {item.descricao}
                     </p>
                     <p className="text-sm text-gray-500">
-                      <span className="font-semibold text-gray-700">Quantidade:</span>{" "}
+                      <span className="font-semibold text-gray-700">
+                        Quantidade:
+                      </span>{" "}
                       {item.quantidade}
                     </p>
                     <p className="text-sm text-gray-500">
-                      <span className="font-semibold text-gray-700">Valor Unitário:</span>{" "}
+                      <span className="font-semibold text-gray-700">
+                        Valor Unitário:
+                      </span>{" "}
                       {item.precoUnitario.toLocaleString("pt-BR", {
                         style: "currency",
                         currency: "BRL",
                       })}
                     </p>
                     <p className="text-sm text-gray-500">
-                      <span className="font-semibold text-gray-700">Desconto:</span>{" "}
+                      <span className="font-semibold text-gray-700">
+                        Desconto:
+                      </span>{" "}
                       {item.valorDesconto > 0
                         ? item.valorDesconto.toLocaleString("pt-BR", {
                             style: "currency",
@@ -205,7 +227,9 @@ export const ModalItensPedido = ({ pedido }: ModalDetalhesPedidoProps) => {
                         : "—"}
                     </p>
                     <p className="text-sm text-gray-500">
-                      <span className="font-semibold text-gray-700">Total:</span>{" "}
+                      <span className="font-semibold text-gray-700">
+                        Total:
+                      </span>{" "}
                       {item.valorTotal.toLocaleString("pt-BR", {
                         style: "currency",
                         currency: "BRL",
@@ -216,7 +240,7 @@ export const ModalItensPedido = ({ pedido }: ModalDetalhesPedidoProps) => {
               </div>
 
               {/* ✅ Desktop: Tabela */}
-              <div className="hidden md:block border rounded-lg overflow-x-auto w-full">
+              <div className="hidden w-full overflow-x-auto rounded-lg border md:block">
                 <Table className="min-w-[600px] table-auto">
                   <TableHeader>
                     <TableRow className="bg-gray-200">
@@ -231,7 +255,7 @@ export const ModalItensPedido = ({ pedido }: ModalDetalhesPedidoProps) => {
                       ].map((header) => (
                         <TableHead
                           key={header}
-                          className="text-gray-600 text-base italic font-semibold text-center"
+                          className="text-center text-base font-semibold text-gray-600 italic"
                         >
                           {header}
                         </TableHead>
@@ -241,25 +265,25 @@ export const ModalItensPedido = ({ pedido }: ModalDetalhesPedidoProps) => {
                   <TableBody className="divide-y divide-gray-200">
                     {itens.map((item, index) => (
                       <TableRow key={index}>
-                        <TableCell className="font-semibold text-gray-800 italic text-center text-lg tracking-wider">
+                        <TableCell className="text-center text-lg font-semibold tracking-wider text-gray-800 italic">
                           {item.item}
                         </TableCell>
-                        <TableCell className="font-semibold text-gray-800 italic text-center text-lg tracking-wider">
+                        <TableCell className="text-center text-lg font-semibold tracking-wider text-gray-800 italic">
                           {item.produto}
                         </TableCell>
-                        <TableCell className="font-semibold text-gray-800 italic text-left text-lg tracking-wider">
+                        <TableCell className="text-left text-lg font-semibold tracking-wider text-gray-800 italic">
                           {item.descricao}
                         </TableCell>
-                        <TableCell className="font-semibold text-gray-800 italic text-center text-lg tracking-wider">
+                        <TableCell className="text-center text-lg font-semibold tracking-wider text-gray-800 italic">
                           {item.quantidade}
                         </TableCell>
-                        <TableCell className="font-semibold text-gray-800 italic text-center text-lg tracking-wider">
+                        <TableCell className="text-center text-lg font-semibold tracking-wider text-gray-800 italic">
                           {item.precoUnitario.toLocaleString("pt-BR", {
                             style: "currency",
                             currency: "BRL",
                           })}
                         </TableCell>
-                        <TableCell className="font-semibold text-gray-800 italic text-center text-lg tracking-wider">
+                        <TableCell className="text-center text-lg font-semibold tracking-wider text-gray-800 italic">
                           {item.valorDesconto > 0
                             ? item.valorDesconto.toLocaleString("pt-BR", {
                                 style: "currency",
@@ -267,7 +291,7 @@ export const ModalItensPedido = ({ pedido }: ModalDetalhesPedidoProps) => {
                               })
                             : "—"}
                         </TableCell>
-                        <TableCell className="font-semibold text-gray-800 italic text-center text-lg tracking-wider">
+                        <TableCell className="text-center text-lg font-semibold tracking-wider text-gray-800 italic">
                           {item.valorTotal.toLocaleString("pt-BR", {
                             style: "currency",
                             currency: "BRL",

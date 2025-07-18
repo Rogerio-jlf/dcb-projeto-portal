@@ -38,83 +38,87 @@ export function FiltrosDashboard() {
   const [mes, setMes] = useState<string>("");
 
   return (
+    // Container principal
     <div className="w-full">
-      {/* Header Principal */}
+      {/* ========== Filtros ========== */}
+      <div className="relative z-10 grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {/* ========== ANO ========== */}
+        <div className="col-span-1 flex flex-col gap-2">
+          <Label
+            htmlFor="ano"
+            className="flex items-center gap-3 text-lg font-semibold tracking-wider text-slate-700 uppercase italic transition-colors duration-300 dark:text-white"
+          >
+            <CalendarDays className="h-6 w-6 text-slate-700 dark:text-white" />
+            Ano
+          </Label>
+          {/* ---------- */}
 
-      {/* Filtros Component */}
-      <div className="bg-slate-900 rounded-2xl shadow-2xl border border-slate-700 p-4 sm:p-5 lg:p-6 relative overflow-hidden">
-        {/* Background pattern */}
-        {/* Filtros */}
-        <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
-          {/* ANO */}
-          <div className="col-span-1 flex flex-col gap-2">
-            <Label
-              htmlFor="ano"
-              className="text-sm font-semibold text-white flex items-center gap-2 tracking-wide"
+          <Select
+            value={ano}
+            onValueChange={setAno}
+          >
+            <SelectTrigger
+              id="ano"
+              className="w-full cursor-pointer border-slate-300 bg-white text-base font-semibold tracking-wider text-slate-800 transition-colors duration-300 hover:bg-slate-100 focus:ring focus:ring-blue-500 dark:border-slate-500 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700 dark:focus:ring-white"
             >
-              <div className="p-1.5 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg">
-                <CalendarDays className="w-4 h-4 text-white" />
-              </div>
-              Ano
-            </Label>
-
-            <Select value={ano} onValueChange={setAno}>
-              <SelectTrigger
-                id="ano"
-                className="w-full bg-slate-800/70 border-slate-600/50 text-white placeholder:text-slate-400 font-medium shadow-lg backdrop-blur-sm hover:bg-slate-700/70 hover:border-slate-500/70 transition-all duration-200 cursor-pointer focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50"
-              >
-                <SelectValue placeholder="Selecionar ano" />
-              </SelectTrigger>
-
-              <SelectContent className="bg-slate-800 border-slate-600 shadow-2xl backdrop-blur-sm">
-                {arrayAnos.map((m) => (
-                  <SelectItem
-                    key={m.value}
-                    value={m.value}
-                    className="text-white hover:bg-cyan-600/80 hover:text-white focus:bg-cyan-600/80 focus:text-white cursor-pointer transition-all duration-200"
-                  >
-                    {m.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* MÊS */}
-          <div className="col-span-1 flex flex-col gap-2">
-            <Label
-              htmlFor="mes"
-              className="text-sm font-semibold text-white flex items-center gap-2 tracking-wide"
-            >
-              <div className="p-1.5 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg">
-                <CalendarDays className="w-4 h-4 text-white" />
-              </div>
-              Mês
-            </Label>
-
-            <Select value={mes} onValueChange={setMes}>
-              <SelectTrigger
-                id="mes"
-                className="w-full bg-slate-800/70 border-slate-600/50 text-white placeholder:text-slate-400 font-medium shadow-lg backdrop-blur-sm hover:bg-slate-700/70 hover:border-slate-500/70 transition-all duration-200 cursor-pointer focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50"
-              >
-                <SelectValue placeholder="Selecionar mês" />
-              </SelectTrigger>
-
-              <SelectContent className="bg-slate-800 border-slate-600 shadow-2xl backdrop-blur-sm">
-                {arrayMeses.map((m) => (
-                  <SelectItem
-                    key={m.value}
-                    value={m.value}
-                    className="text-white hover:bg-purple-600/80 hover:text-white focus:bg-purple-600/80 focus:text-white cursor-pointer transition-all duration-200"
-                  >
-                    {m.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+              <SelectValue placeholder="Selecionar ano" />
+            </SelectTrigger>
+            {/* ---------- */}
+            <SelectContent className="border-slate-300 bg-white dark:border-slate-500 dark:bg-slate-900">
+              {arrayAnos.map((a) => (
+                <SelectItem
+                  key={a.value}
+                  value={a.value}
+                  className="cursor-pointer text-base font-semibold tracking-wider text-slate-800 transition-colors duration-300 hover:bg-blue-100 hover:text-slate-900 dark:text-white dark:hover:bg-cyan-500 dark:hover:text-black"
+                >
+                  {a.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+            {/* ---------- */}
+          </Select>
         </div>
+        {/* ---------- */}
+
+        {/* ========== MÊS ========== */}
+        <div className="col-span-1 flex flex-col gap-2">
+          <Label
+            htmlFor="mes"
+            className="flex items-center gap-3 text-lg font-semibold tracking-wider text-slate-700 uppercase italic transition-colors duration-300 dark:text-white"
+          >
+            <CalendarDays className="h-6 w-6 text-slate-700 dark:text-white" />
+            Mês
+          </Label>
+          {/* ---------- */}
+
+          <Select
+            value={mes}
+            onValueChange={setMes}
+          >
+            <SelectTrigger
+              id="mes"
+              className="w-full cursor-pointer border-slate-300 bg-white text-base font-semibold tracking-wider text-slate-800 transition-colors duration-300 hover:bg-slate-100 focus:ring focus:ring-blue-500 dark:border-slate-500 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700 dark:focus:ring-white"
+            >
+              <SelectValue placeholder="Selecionar mês" />
+            </SelectTrigger>
+            {/* ---------- */}
+            <SelectContent className="border-slate-300 bg-white dark:border-slate-500 dark:bg-slate-900">
+              {arrayMeses.map((m) => (
+                <SelectItem
+                  key={m.value}
+                  value={m.value}
+                  className="cursor-pointer text-base font-semibold tracking-wider text-slate-800 transition-colors duration-300 hover:bg-blue-100 hover:text-slate-900 dark:text-white dark:hover:bg-cyan-500 dark:hover:text-black"
+                >
+                  {m.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+            {/* ---------- */}
+          </Select>
+        </div>
+        {/* ---------- */}
       </div>
+      {/* ---------- */}
     </div>
   );
 }

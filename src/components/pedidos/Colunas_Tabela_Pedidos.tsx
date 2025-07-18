@@ -3,7 +3,13 @@
 
 import { PedidoStatusLabel, PedidoType } from "@/types/pedido";
 import { ColumnDef } from "@tanstack/react-table";
-import { Circle, CircleCheck, CircleX, Clock, UnlockKeyholeIcon } from "lucide-react";
+import {
+  Circle,
+  CircleCheck,
+  CircleX,
+  Clock,
+  UnlockKeyholeIcon,
+} from "lucide-react";
 import DownloadXml from "./Download_XML";
 import { ModalItensPedido } from "./Modal_Itens_Pedido";
 
@@ -65,25 +71,28 @@ export const StatusBadge = ({ status }: { status: string }) => {
     },
   };
 
-  const config = configs[status.toUpperCase() as keyof typeof configs] || configs["1"];
+  const config =
+    configs[status.toUpperCase() as keyof typeof configs] || configs["1"];
   const Icon = config.icon;
 
   return (
     <>
-      <div className="hidden md:flex justify-center">
+      <div className="hidden justify-center md:flex">
         <div
-          className={`flex items-center gap-2 p-2 rounded-full text-base font-semibold italic tracking-wider ${config.style}`}
+          className={`flex items-center gap-2 rounded-full p-2 text-base font-semibold tracking-wider italic ${config.style}`}
         >
-          <Icon className="w-5 h-5" />
+          <Icon className="h-5 w-5" />
           {PedidoStatusLabel[status as keyof typeof PedidoStatusLabel]}
         </div>
       </div>
 
-      <div className="md:hidden flex items-center gap-2">
-        <div className={`p-2 rounded-full ${config.bgMobile} border`}>
-          <Icon className={`w-5 h-5 ${config.textMobile}`} />
+      <div className="flex items-center gap-2 md:hidden">
+        <div className={`rounded-full p-2 ${config.bgMobile} border`}>
+          <Icon className={`h-5 w-5 ${config.textMobile}`} />
         </div>
-        <span className={`text-sm font-semibold ${config.textMobile}`}>{status}</span>
+        <span className={`text-sm font-semibold ${config.textMobile}`}>
+          {status}
+        </span>
       </div>
     </>
   );
@@ -94,7 +103,7 @@ export const colunasTabelaPedidos: ColumnDef<PedidoType>[] = [
     accessorKey: "C5_NUM",
     header: "Pedido nº",
     cell: ({ getValue }) => (
-      <div className="font-semibold text-lg text-gray-800 italic tracking-wider">
+      <div className="text-lg font-semibold tracking-wider text-gray-800 italic">
         {String(getValue())}
       </div>
     ),
@@ -107,7 +116,7 @@ export const colunasTabelaPedidos: ColumnDef<PedidoType>[] = [
       const date: string = getValue() as string;
       const [year, month, day] = date.split("/").reverse();
       return (
-        <div className="font-semibold text-lg text-gray-800 italic tracking-wider">{`${day}/${month}/${year}`}</div>
+        <div className="text-lg font-semibold tracking-wider text-gray-800 italic">{`${day}/${month}/${year}`}</div>
       );
     },
   },
@@ -116,7 +125,7 @@ export const colunasTabelaPedidos: ColumnDef<PedidoType>[] = [
     accessorKey: "TOTAL",
     header: "Valor",
     cell: ({ getValue }) => (
-      <div className="font-semibold text-lg text-gray-800 italic tracking-wider">
+      <div className="text-lg font-semibold tracking-wider text-gray-800 italic">
         {Number(getValue()).toLocaleString("pt-BR", {
           style: "currency",
           currency: "BRL",

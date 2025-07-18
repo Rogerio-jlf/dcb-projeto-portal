@@ -39,9 +39,12 @@ export function LayoutContasPagar() {
   });
 
   const total = contasAPagar?.length || 0;
-  const pagas = contasAPagar?.filter((n: ContasAPagarType) => n.STATUS === "3").length || 0;
-  const pendentes = contasAPagar?.filter((n: ContasAPagarType) => n.STATUS === "1").length || 0;
-  const vencidas = contasAPagar?.filter((n: ContasAPagarType) => n.STATUS === "2").length || 0;
+  const pagas =
+    contasAPagar?.filter((n: ContasAPagarType) => n.STATUS === "3").length || 0;
+  const pendentes =
+    contasAPagar?.filter((n: ContasAPagarType) => n.STATUS === "1").length || 0;
+  const vencidas =
+    contasAPagar?.filter((n: ContasAPagarType) => n.STATUS === "2").length || 0;
 
   // function filtrarPorStatus(contas: ContasAPagarType[]): ContasAPagarType[] {
   //   return status == "0"
@@ -55,9 +58,9 @@ export function LayoutContasPagar() {
 
   if (isLoading) {
     return (
-      <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/70 z-50">
-        <Loader2 className="w-16 h-16 text-emerald-600 animate-spin" />
-        <p className="mt-4 text-lg font-semibold text-emerald-700 animate-pulse">
+      <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-white/70">
+        <Loader2 className="h-16 w-16 animate-spin text-emerald-600" />
+        <p className="mt-4 animate-pulse text-lg font-semibold text-emerald-700">
           Carregando contas a pagar, aguarde...
         </p>
       </div>
@@ -70,10 +73,10 @@ export function LayoutContasPagar() {
       <SidebarNavegacao />
 
       {/* Área principal com layout vertical */}
-      <main className="flex-1 h-screen flex flex-col">
+      <main className="flex h-screen flex-1 flex-col">
         <div className="relative"></div>
         <div className="flex-shrink-0 bg-white">
-          <div className="px-4 md:px-6 lg:px-8 py-4">
+          <div className="px-4 py-4 md:px-6 lg:px-8">
             <div className="space-y-4">
               <FiltrosContasPagar />
               <CardsContasPagar

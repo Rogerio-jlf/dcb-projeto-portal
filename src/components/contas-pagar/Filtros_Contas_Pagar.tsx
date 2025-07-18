@@ -3,7 +3,11 @@
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import {
   Select,
   SelectContent,
@@ -32,35 +36,42 @@ export function FiltrosContasPagar() {
     // CONTAINER PRINCIPAL
     <div className="space-y-4">
       {/* TÍTULO MOBILE */}
-      <div className="md:hidden bg-emerald-700 p-4 rounded-md shadow-md shadow-black">
-        <h2 className="text-2xl italic font-bold text-white text-left">Contas a Pagar</h2>
+      <div className="rounded-md bg-emerald-700 p-4 shadow-md shadow-black md:hidden">
+        <h2 className="text-left text-2xl font-bold text-white italic">
+          Contas a Pagar
+        </h2>
       </div>
 
       {/* TÍTULO DESKTOP */}
-      <div className="hidden md:flex items-center justify-between">
-        <h2 className="text-4xl italic font-bold text-gray-800">Contas a Pagar</h2>
+      <div className="hidden items-center justify-between md:flex">
+        <h2 className="text-4xl font-bold text-gray-800 italic">
+          Contas a Pagar
+        </h2>
       </div>
 
       {/* FILTRO */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
         {/* DATA INICIAL */}
         <div className="col-span-1 flex flex-col">
-          <label className="text-base font-semibold text-gray-800 italic mb-1 flex items-center gap-1 tracking-wider">
-            <CalendarDays className="w-5 h-5 " />
+          <label className="mb-1 flex items-center gap-1 text-base font-semibold tracking-wider text-gray-800 italic">
+            <CalendarDays className="h-5 w-5" />
             Data Inicial
           </label>
           <Popover>
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
-                className="text-lg w-full justify-start text-left font-semibold text-gray-800 cursor-pointer italic shadow-md shadow-black hover:shadow-lg hover:shadow-black tracking-wider"
+                className="w-full cursor-pointer justify-start text-left text-lg font-semibold tracking-wider text-gray-800 italic shadow-md shadow-black hover:shadow-lg hover:shadow-black"
               >
                 {dataInicio
                   ? format(dataInicio, "dd/MM/yyyy", { locale: ptBR })
                   : "Selecionar data"}
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="p-0 bg-white shadow-md shadow-black" align="start">
+            <PopoverContent
+              className="bg-white p-0 shadow-md shadow-black"
+              align="start"
+            >
               <Calendar
                 mode="single"
                 selected={dataInicio}
@@ -74,20 +85,25 @@ export function FiltrosContasPagar() {
 
         {/* DATA FINAL */}
         <div className="col-span-1 flex flex-col">
-          <label className="text-base font-semibold text-gray-800 italic mb-1 flex items-center gap-1 tracking-wider">
-            <CalendarDays className="w-5 h-5" />
+          <label className="mb-1 flex items-center gap-1 text-base font-semibold tracking-wider text-gray-800 italic">
+            <CalendarDays className="h-5 w-5" />
             Data Final
           </label>
           <Popover>
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
-                className="text-lg w-full justify-start text-left font-semibold text-gray-800 cursor-pointer italic shadow-md shadow-black hover:shadow-lg hover:shadow-black tracking-wider"
+                className="w-full cursor-pointer justify-start text-left text-lg font-semibold tracking-wider text-gray-800 italic shadow-md shadow-black hover:shadow-lg hover:shadow-black"
               >
-                {dataFim ? format(dataFim, "dd/MM/yyyy", { locale: ptBR }) : "Selecionar data"}
+                {dataFim
+                  ? format(dataFim, "dd/MM/yyyy", { locale: ptBR })
+                  : "Selecionar data"}
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="p-0 bg-white shadow-md shadow-black" align="start">
+            <PopoverContent
+              className="bg-white p-0 shadow-md shadow-black"
+              align="start"
+            >
               <Calendar
                 mode="single"
                 selected={dataFim}
@@ -102,12 +118,12 @@ export function FiltrosContasPagar() {
 
         {/* NOTA FISCAL */}
         <div className="col-span-1 flex flex-col">
-          <label className="text-base font-semibold text-gray-800 italic mb-1 flex items-center gap-1 tracking-wider">
-            <FileCode className="w-5 h-5" />
+          <label className="mb-1 flex items-center gap-1 text-base font-semibold tracking-wider text-gray-800 italic">
+            <FileCode className="h-5 w-5" />
             Nota Fiscal
           </label>
           <Input
-            className="bg-white shadow-md shadow-black tracking-wider text-lg"
+            className="bg-white text-lg tracking-wider shadow-md shadow-black"
             value={notaFiscal}
             onChange={(event) => setNotaFiscal(event.target.value)}
           />
@@ -115,12 +131,15 @@ export function FiltrosContasPagar() {
 
         {/* STATUS */}
         <div className="col-span-1 flex flex-col">
-          <label className="text-base font-semibold text-gray-800 italic mb-1 flex items-center gap-1 tracking-wider">
-            <Filter className="w-5 h-5" />
+          <label className="mb-1 flex items-center gap-1 text-base font-semibold tracking-wider text-gray-800 italic">
+            <Filter className="h-5 w-5" />
             Status
           </label>
-          <Select value={status} onValueChange={setStatus}>
-            <SelectTrigger className="w-full cursor-pointer text-gray-800 font-semibold italic shadow-md shadow-black hover:shadow-lg hover:shadow-black tracking-wider text-lg">
+          <Select
+            value={status}
+            onValueChange={setStatus}
+          >
+            <SelectTrigger className="w-full cursor-pointer text-lg font-semibold tracking-wider text-gray-800 italic shadow-md shadow-black hover:shadow-lg hover:shadow-black">
               <SelectValue placeholder="Todos" />
             </SelectTrigger>
             <SelectContent className="bg-white shadow-md shadow-black">

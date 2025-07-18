@@ -1,6 +1,12 @@
-// StatCardsGrid.tsx
 import { CheckCircle, Clock, ShoppingCart } from "lucide-react";
-import React from "react";
+
+interface StatCardsGridProps {
+  cardData: {
+    totalCompras: number;
+    comprasPagas: number;
+    comprasAberto: number;
+  };
+}
 
 const formatCurrency = (value: number) =>
   new Intl.NumberFormat("pt-BR", {
@@ -17,139 +23,189 @@ const formatCompactCurrency = (value: number) => {
   return formatCurrency(value);
 };
 
-interface StatCardProps {
-  title: string;
-  value: number;
-  icon: React.ElementType;
-  colorIcon: string;
-  bgColorIcon: string;
-  textColor: string;
-  total?: number;
-  glowColor: string;
-}
-
-function StatCard({
-  title,
-  value,
-  icon: Icon,
-  colorIcon,
-  bgColorIcon,
-  textColor,
-  total = value,
-  glowColor,
-}: StatCardProps) {
+export function CardsDashboard({ cardData }: StatCardsGridProps) {
   return (
-    <div className="bg-slate-900 rounded-2xl shadow-2xl border border-slate-700 p-4 sm:p-5 lg:p-6 group relative overflow-hidden">
-      {/* Background pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-900 to-slate-900 opacity-50"></div>
-      <div
-        className={`absolute top-0 right-0 w-32 h-32 ${glowColor} rounded-full blur-3xl opacity-20`}
-      ></div>
-      <div
-        className={`absolute bottom-0 left-0 w-24 h-24 ${glowColor} rounded-full blur-3xl opacity-10`}
-      ></div>
+    // Container principal
+    <div className="grid grid-cols-1 gap-3">
+      {/* ========== CARD 1 ========== */}
+      <div className="rounded-lg border border-slate-400 bg-white/10 p-6 dark:border-slate-500 dark:bg-slate-900">
+        <div className="relative z-10">
+          <div className="mb-4 flex items-center justify-between">
+            {/* Ícone */}
+            <div className="rounded-lg bg-cyan-500 p-3">
+              <ShoppingCart className="h-7 w-7 text-black" />
+            </div>
 
-      <div className="relative z-10">
-        <div className="flex items-center justify-between mb-4">
-          <div
-            className={`p-3 rounded-xl ${bgColorIcon} transition-all duration-300 group-hover:rotate-12 group-hover:scale-110`}
-            style={{
-              filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.3))",
-            }}
-          >
-            <Icon className={`w-6 h-6 ${colorIcon}`} />
-          </div>
-          <div className="text-right">
-            <div className="flex items-center gap-2 mb-1">
-              <div className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse"></div>
-              <p className="text-xs sm:text-sm font-bold text-white uppercase tracking-wide">
-                {title}
+            {/* Título e valor */}
+            <div className="text-right">
+              <div className="mb-2 flex items-center gap-3">
+                <div className="h-3 w-3 animate-pulse rounded-full bg-cyan-500"></div>
+                <p className="text-base font-semibold tracking-wider text-slate-700 uppercase italic transition-colors duration-300 dark:text-white">
+                  Total Compras
+                </p>
+              </div>
+
+              <p className="text-3xl font-extrabold tracking-wider text-cyan-600 transition-colors duration-300 dark:text-cyan-400">
+                {formatCompactCurrency(cardData.totalCompras)}
               </p>
             </div>
-            <p
-              className={`text-2xl sm:text-3xl font-extrabold ${textColor} transition-all duration-300`}
-            >
-              {formatCompactCurrency(value)}
-            </p>
           </div>
-        </div>
+          {/* ---------- */}
 
-        <div className="space-y-3">
-          <div className="flex justify-between text-xs font-semibold text-slate-400">
-            <span>Progresso</span>
-            <span className="text-slate-300">{Math.round((value / total) * 100)}%</span>
-          </div>
+          <div className="space-y-2">
+            {/* Progresso */}
+            <div className="flex justify-between text-sm font-semibold tracking-wider text-slate-600 transition-colors duration-300 dark:text-slate-300">
+              <span className="italic">Progresso</span>
+              <span>100%</span>
+            </div>
 
-          <div className="relative">
-            <div className="w-full bg-slate-700/50 rounded-full h-2 backdrop-blur-sm border border-slate-600/30">
-              <div
-                className={`h-2 rounded-full ${bgColorIcon} transition-all duration-700 ease-out relative overflow-hidden`}
-                style={{ width: `${Math.min((value / total) * 100, 100)}%` }}
-              >
-                {/* Animated shine effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
+            {/* Barra de progresso */}
+            <div className="relative">
+              <div className="h-2 w-full rounded-full bg-slate-200 transition-colors duration-300 dark:bg-slate-700">
+                <div className="relative h-2 overflow-hidden rounded-full bg-cyan-500"></div>
+              </div>
+            </div>
+
+            {/* Valor atual */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 tracking-wider">
+                <div className="h-3 w-3 animate-pulse rounded-full bg-cyan-500"></div>
+                <span className="text-sm font-semibold text-slate-600 italic transition-colors duration-300 dark:text-slate-300">
+                  Valor atual
+                </span>
               </div>
             </div>
           </div>
-
-          {/* Stats footer */}
-          <div className="flex items-center justify-between pt-2 border-t border-slate-700/50">
-            <div className="flex items-center gap-2 text-xs text-slate-400">
-              <div
-                className={`w-2 h-2 rounded-full ${bgColorIcon.replace("bg-gradient-to-br", "bg")}`}
-              ></div>
-              <span>Valor atual</span>
-            </div>
-            <div className="text-xs text-slate-300 font-medium">
-              {total !== value && `de ${formatCompactCurrency(total)}`}
-            </div>
-          </div>
+          {/* ---------- */}
         </div>
       </div>
-    </div>
-  );
-}
+      {/* ---------- */}
 
-interface StatCardsGridProps {
-  cardData: {
-    totalCompras: number;
-    comprasPagas: number;
-    comprasAberto: number;
-  };
-}
+      {/* ========== CARD 2 ========== */}
+      <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-lg transition-colors duration-300 dark:border-slate-500 dark:bg-slate-900 dark:shadow-2xl">
+        <div className="relative z-10">
+          <div className="mb-4 flex items-center justify-between">
+            {/* Ícone */}
+            <div className="rounded-lg bg-emerald-500 p-3">
+              <CheckCircle className="h-7 w-7 text-black" />
+            </div>
 
-export function CardsDashboard({ cardData }: StatCardsGridProps) {
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3 sm:gap-4 md:gap-6">
-      <StatCard
-        title="Valor Total de Compras"
-        value={cardData.totalCompras}
-        icon={ShoppingCart}
-        colorIcon="text-white"
-        bgColorIcon="bg-gradient-to-br from-cyan-500 to-blue-600"
-        textColor="text-cyan-400"
-        glowColor="bg-gradient-to-br from-cyan-600/30 to-blue-600/30"
-      />
-      <StatCard
-        title="Total de Compras Pagas"
-        value={cardData.comprasPagas}
-        icon={CheckCircle}
-        colorIcon="text-white"
-        bgColorIcon="bg-gradient-to-br from-emerald-500 to-green-600"
-        textColor="text-emerald-400"
-        total={cardData.totalCompras}
-        glowColor="bg-gradient-to-br from-emerald-600/30 to-green-600/30"
-      />
-      <StatCard
-        title="Total de Compras em Aberto"
-        value={cardData.comprasAberto}
-        icon={Clock}
-        colorIcon="text-white"
-        bgColorIcon="bg-gradient-to-br from-red-500 to-pink-600"
-        textColor="text-red-400"
-        total={cardData.totalCompras}
-        glowColor="bg-gradient-to-br from-red-600/30 to-pink-600/30"
-      />
+            {/* Título e valor */}
+            <div className="text-right">
+              <div className="mb-2 flex items-center gap-3">
+                <div className="h-3 w-3 animate-pulse rounded-full bg-emerald-500"></div>
+                <p className="text-base font-semibold tracking-wider text-slate-700 uppercase italic transition-colors duration-300 dark:text-white">
+                  Total Compras Pagas
+                </p>
+              </div>
+
+              <p className="text-3xl font-extrabold tracking-wider text-emerald-600 transition-colors duration-300 dark:text-emerald-400">
+                {formatCompactCurrency(cardData.comprasPagas)}
+              </p>
+            </div>
+          </div>
+          {/* ---------- */}
+
+          <div className="space-y-2">
+            {/* Progresso */}
+            <div className="flex justify-between text-sm font-semibold tracking-wider text-slate-600 transition-colors duration-300 dark:text-slate-300">
+              <span className="italic">Progresso</span>
+              <span>
+                {Math.round(
+                  (cardData.comprasPagas / cardData.totalCompras) * 100
+                )}
+                %
+              </span>
+            </div>
+
+            {/* Barra de progresso */}
+            <div className="relative">
+              <div className="h-2 w-full rounded-full bg-slate-200 transition-colors duration-300 dark:bg-slate-700">
+                <div
+                  className="relative h-2 overflow-hidden rounded-full bg-emerald-500"
+                  style={{
+                    width: `${Math.min((cardData.comprasPagas / cardData.totalCompras) * 100, 100)}%`,
+                  }}
+                ></div>
+              </div>
+            </div>
+
+            {/* Valor atual */}
+            <div className="flex items-center justify-between text-sm font-semibold text-slate-600 transition-colors duration-300 dark:text-slate-300">
+              <div className="flex items-center gap-2 tracking-wider">
+                <div className="h-3 w-3 animate-pulse rounded-full bg-emerald-500"></div>
+                <span className="italic">Valor atual</span>
+              </div>
+              <div>de {formatCompactCurrency(cardData.totalCompras)}</div>
+            </div>
+          </div>
+          {/* ---------- */}
+        </div>
+      </div>
+      {/* ---------- */}
+
+      {/* ========== CARD 3 ========== */}
+      <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-lg transition-colors duration-300 dark:border-slate-500 dark:bg-slate-900 dark:shadow-2xl">
+        <div className="relative z-10">
+          <div className="mb-4 flex items-center justify-between">
+            {/* Ícone */}
+            <div className="rounded-lg bg-red-500 p-3">
+              <Clock className="h-7 w-7 text-black" />
+            </div>
+
+            {/* Título e valor */}
+            <div className="text-right">
+              <div className="mb-2 flex items-center gap-3">
+                <div className="h-3 w-3 animate-pulse rounded-full bg-red-500"></div>
+                <p className="text-base font-semibold tracking-wider text-slate-700 uppercase italic transition-colors duration-300 dark:text-white">
+                  Total Compras Aberto
+                </p>
+              </div>
+
+              <p className="text-3xl font-extrabold tracking-wider text-red-600 transition-colors duration-300 dark:text-red-400">
+                {formatCompactCurrency(cardData.comprasAberto)}
+              </p>
+            </div>
+          </div>
+          {/* ---------- */}
+
+          <div className="space-y-2">
+            {/* Progresso */}
+            <div className="flex justify-between text-sm font-semibold tracking-wider text-slate-600 transition-colors duration-300 dark:text-slate-300">
+              <span className="italic">Progresso</span>
+              <span className="text-slate-600 dark:text-slate-300">
+                {Math.round(
+                  (cardData.comprasAberto / cardData.totalCompras) * 100
+                )}
+                %
+              </span>
+            </div>
+
+            {/* Barra de progresso */}
+            <div className="relative">
+              <div className="h-2 w-full rounded-full bg-slate-200 transition-colors duration-300 dark:bg-slate-700">
+                <div
+                  className="relative h-2 overflow-hidden rounded-full bg-red-500"
+                  style={{
+                    width: `${Math.min((cardData.comprasAberto / cardData.totalCompras) * 100, 100)}%`,
+                  }}
+                ></div>
+              </div>
+            </div>
+
+            {/* Valor atual */}
+            <div className="flex items-center justify-between text-sm font-semibold text-slate-600 transition-colors duration-300 dark:text-slate-300">
+              <div className="flex items-center gap-2 tracking-wider">
+                <div className="h-3 w-3 animate-pulse rounded-full bg-red-500"></div>
+                <span className="italic">Valor atual</span>
+              </div>
+              <div>de {formatCompactCurrency(cardData.totalCompras)}</div>
+            </div>
+          </div>
+          {/* ---------- */}
+        </div>
+      </div>
+      {/* ---------- */}
     </div>
   );
 }

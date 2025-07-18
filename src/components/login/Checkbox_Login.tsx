@@ -50,11 +50,11 @@ export default function CheckboxLogin({ email, setEmail }: CheckboxLoginProps) {
           type="checkbox"
           checked={checked}
           onChange={(e) => handleChange(e.target.checked)}
-          className="h-7 w-7 text-emerald-400 focus:ring-emerald-400 border-white/50 rounded bg-white/10 transition-all duration-200 cursor-pointer"
+          className="h-7 w-7 cursor-pointer rounded border-white/50 bg-white/10 text-emerald-400 transition-all duration-200 focus:ring-emerald-400"
         />
         <label
           htmlFor="remember"
-          className="ml-2 block text-base italic text-white hover:text-black transition-colors cursor-pointer tracking-wider font-semibold"
+          className="ml-2 block cursor-pointer text-base font-semibold tracking-wider text-white italic transition-colors hover:text-black"
         >
           Lembrar-me
         </label>

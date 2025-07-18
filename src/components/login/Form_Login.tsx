@@ -59,21 +59,24 @@ export default function LoginForm() {
           }
         }, 5000);
       } else {
-        toast.error("❌ Erro ao realizar login. Credenciais inválidas, verifique.", {
-          position: "top-right",
-          autoClose: 5000,
-          closeOnClick: false,
-          closeButton: false,
-          theme: "dark",
-          style: {
-            fontSize: "18px",
-            fontWeight: "500",
-            borderRadius: "10px",
-            width: "400px",
-            maxWidth: "90%",
-            padding: "16px",
-          },
-        });
+        toast.error(
+          "❌ Erro ao realizar login. Credenciais inválidas, verifique.",
+          {
+            position: "top-right",
+            autoClose: 5000,
+            closeOnClick: false,
+            closeButton: false,
+            theme: "dark",
+            style: {
+              fontSize: "18px",
+              fontWeight: "500",
+              borderRadius: "10px",
+              width: "400px",
+              maxWidth: "90%",
+              padding: "16px",
+            },
+          }
+        );
         setIsLoading(false);
       }
     } catch {
@@ -97,19 +100,28 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="bg-white/5 backdrop-blur-2xl rounded-lg shadow-xl shadow-black overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300 relative">
-      <div className="absolute top-0 left-0 right-0 h-2 bg-teal-400"></div>
+    <div className="relative overflow-hidden rounded-lg border border-white/10 bg-white/5 shadow-xl shadow-black backdrop-blur-2xl transition-all duration-300 hover:border-white/20">
+      <div className="absolute top-0 right-0 left-0 h-2 bg-teal-400"></div>
       <HeaderLogin />
-      <form className="p-8" onSubmit={handleSubmit}>
+      <form
+        className="p-8"
+        onSubmit={handleSubmit}
+      >
         <div className="space-y-6">
-          <EmailInputLogin value={email} onChange={setEmail} />
+          <EmailInputLogin
+            value={email}
+            onChange={setEmail}
+          />
           <PasswordInputLogin
             value={password}
             onChange={setPassword}
             showPassword={showPassword}
             setShowPassword={setShowPassword}
           />
-          <CheckboxLogin email={email} setEmail={setEmail} />
+          <CheckboxLogin
+            email={email}
+            setEmail={setEmail}
+          />
           <ButtonLogin isLoading={isLoading} />
         </div>
       </form>

@@ -8,10 +8,13 @@ interface SidebarHeaderProps {
   currentTime: Date;
 }
 
-export function SidebarHeader({ isCollapsed, toggleCollapse }: SidebarHeaderProps) {
+export function SidebarHeader({
+  isCollapsed,
+  toggleCollapse,
+}: SidebarHeaderProps) {
   return (
     <>
-      <div className="flex items-center justify-between p-6 border-b border-emerald-300/10">
+      <div className="flex items-center justify-between border-b border-emerald-300/10 p-6">
         {!isCollapsed && (
           <div className="flex items-center space-x-3">
             <div className="relative">
@@ -23,19 +26,19 @@ export function SidebarHeader({ isCollapsed, toggleCollapse }: SidebarHeaderProp
                 className="object-contain brightness-110"
                 priority
               />
-              <div className="absolute -inset-1 bg-gradient-to-r from-emerald-400/20 to-cyan-400/20 rounded-lg blur-sm -z-10" />
+              <div className="absolute -inset-1 -z-10 rounded-lg bg-gradient-to-r from-emerald-400/20 to-cyan-400/20 blur-sm" />
             </div>
             <div className="flex items-center space-x-1">
-              <Heart className="w-4 h-4 text-red-400 animate-pulse" />
-              <Shield className="w-4 h-4 text-emerald-400 animate-pulse" />
-              <Activity className="w-4 h-4 text-cyan-400 animate-pulse" />
+              <Heart className="h-4 w-4 animate-pulse text-red-400" />
+              <Shield className="h-4 w-4 animate-pulse text-emerald-400" />
+              <Activity className="h-4 w-4 animate-pulse text-cyan-400" />
             </div>
           </div>
         )}
 
         <button
           onClick={toggleCollapse}
-          className="hidden md:flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 border border-emerald-300/30 hover:from-emerald-500/30 hover:to-cyan-500/30 transition-all duration-500 text-emerald-200 hover:text-white group hover:scale-105 active:scale-95 shadow-lg hover:shadow-emerald-500/20"
+          className="group hidden h-10 w-10 items-center justify-center rounded-xl border border-emerald-300/30 bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 text-emerald-200 shadow-lg transition-all duration-500 hover:scale-105 hover:from-emerald-500/30 hover:to-cyan-500/30 hover:text-white hover:shadow-emerald-500/20 active:scale-95 md:flex"
         >
           <ChevronRight
             size={16}
@@ -47,12 +50,14 @@ export function SidebarHeader({ isCollapsed, toggleCollapse }: SidebarHeaderProp
       </div>
 
       {!isCollapsed && (
-        <div className="px-6 py-4 border-b border-emerald-300/10">
-          <div className="bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 rounded-xl p-4 border border-emerald-300/20">
+        <div className="border-b border-emerald-300/10 px-6 py-4">
+          <div className="rounded-xl border border-emerald-300/20 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 p-4">
             <div className="flex flex-col space-y-1">
-              <span className="text-cyan-300 text-xs font-medium block">Bem-vindo,</span>
+              <span className="block text-xs font-medium text-cyan-300">
+                Bem-vindo,
+              </span>
 
-              <span className="text-cyan-300 text-sm block">
+              <span className="block text-sm text-cyan-300">
                 {/* {userLoading ? "Carregando usuário..." : (userData?.nome ?? "Usuário")} */}
               </span>
             </div>

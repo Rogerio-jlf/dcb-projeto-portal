@@ -1,7 +1,11 @@
 "use client";
 
 import { ContasAPagarType } from "@/types/financeiro";
-import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
+import {
+  flexRender,
+  getCoreRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
 import { AlertOctagon, AlertTriangle, DollarSign } from "lucide-react";
 import { colunasTabelaContasPagar } from "./Colunas_Tabela_Contas_Pagar";
 import { TabelaMobile } from "./Tabela_Mobile";
@@ -27,19 +31,19 @@ export function TabelaContasPagar({ dados }: TabelaContasPagarProps) {
     <>
       {/* ========================== TABELA DESKTOP ========================== */}
       <div className="hidden md:block">
-        <div className="flex flex-col h-[56vh] overflow-hidden rounded-lg bg-white shadow-md shadow-black">
+        <div className="flex h-[56vh] flex-col overflow-hidden rounded-lg bg-white shadow-md shadow-black">
           {/* Cabeçalho */}
           <div className="bg-black/80 p-4">
-            <h3 className="text-2xl font-semibold text-white tracking-wide italic">
+            <h3 className="text-2xl font-semibold tracking-wide text-white italic">
               Contas a Pagar
             </h3>
           </div>
 
           {/* Corpo com rolagem interna */}
-          <div className="flex-1 overflow-y-auto custom-scrollbar">
+          <div className="custom-scrollbar flex-1 overflow-y-auto">
             {naoTemDados ? (
-              <div className="flex justify-center items-center h-full p-10">
-                <p className="text-gray-600 italic text-lg">
+              <div className="flex h-full items-center justify-center p-10">
+                <p className="text-lg text-gray-600 italic">
                   Nenhum pedido encontrado no período selecionado.
                 </p>
               </div>
@@ -51,12 +55,15 @@ export function TabelaContasPagar({ dados }: TabelaContasPagarProps) {
                       {headerGroup.headers.map((header) => (
                         <th
                           key={header.id}
-                          className="p-4 bg-teal-500 text-black font-extrabold text-center text-xl italic tracking-wider"
+                          className="bg-teal-500 p-4 text-center text-xl font-extrabold tracking-wider text-black italic"
                         >
                           <div className="flex items-center space-x-2">
                             {header.isPlaceholder
                               ? null
-                              : flexRender(header.column.columnDef.header, header.getContext())}
+                              : flexRender(
+                                  header.column.columnDef.header,
+                                  header.getContext()
+                                )}
                           </div>
                         </th>
                       ))}
@@ -75,7 +82,10 @@ export function TabelaContasPagar({ dados }: TabelaContasPagarProps) {
                           }`}
                         >
                           <div className="flex items-center">
-                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )}
                           </div>
                         </td>
                       ))}
@@ -89,38 +99,46 @@ export function TabelaContasPagar({ dados }: TabelaContasPagarProps) {
       </div>
 
       {/* ========================== TABELA MOBILE ========================== */}
-      <div className="block md:hidden space-y-5 px-2">
+      <div className="block space-y-5 px-2 md:hidden">
         {naoTemDados ? (
-          <div className="text-center p-4">
-            <p className="text-gray-500 italic text-base">
+          <div className="p-4 text-center">
+            <p className="text-base text-gray-500 italic">
               Nenhum pedido encontrado no período selecionado.
             </p>
           </div>
         ) : (
-          table.getRowModel().rows.map((row) => <TabelaMobile key={row.id} row={row} />)
+          table.getRowModel().rows.map((row) => (
+            <TabelaMobile
+              key={row.id}
+              row={row}
+            />
+          ))
         )}
       </div>
 
       {/* ========================== CARDS DE TOTAIS ========================== */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-24">
+      <div className="grid grid-cols-1 gap-4 pb-24 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {/* Card Valor Total */}
-        <div className="bg-white rounded-lg shadow-md shadow-black overflow-hidden relative group text-xs sm:text-sm">
-          <div className="absolute top-0 left-0 right-0 h-1.5 bg-green-500"></div>
+        <div className="group relative overflow-hidden rounded-lg bg-white text-xs shadow-md shadow-black sm:text-sm">
+          <div className="absolute top-0 right-0 left-0 h-1.5 bg-green-500"></div>
           <div className="p-3 sm:p-4">
             <div className="flex flex-col gap-2">
-              <p className="font-semibold text-base text-gray-800 italic tracking-wider">
+              <p className="text-base font-semibold tracking-wider text-gray-800 italic">
                 VALOR TOTAL
               </p>
-              <div className="flex justify-between items-center">
-                <p className="text-base sm:text-lg font-bold text-gray-800 italic tracking-wider">
+              <div className="flex items-center justify-between">
+                <p className="text-base font-bold tracking-wider text-gray-800 italic sm:text-lg">
                   R${" "}
                   {totalValor.toLocaleString("pt-BR", {
                     style: "currency",
                     currency: "BRL",
                   })}
                 </p>
-                <div className="p-4 rounded-lg bg-green-500 text-black shadow-md shadow-black">
-                  <DollarSign className="w-4 h-4" strokeWidth={2} />
+                <div className="rounded-lg bg-green-500 p-4 text-black shadow-md shadow-black">
+                  <DollarSign
+                    className="h-4 w-4"
+                    strokeWidth={2}
+                  />
                 </div>
               </div>
             </div>
@@ -128,23 +146,26 @@ export function TabelaContasPagar({ dados }: TabelaContasPagarProps) {
         </div>
 
         {/* Card Juros */}
-        <div className="bg-white rounded-lg shadow-md shadow-black overflow-hidden relative group text-xs sm:text-sm">
-          <div className="absolute top-0 left-0 right-0 h-1.5 bg-yellow-500"></div>
+        <div className="group relative overflow-hidden rounded-lg bg-white text-xs shadow-md shadow-black sm:text-sm">
+          <div className="absolute top-0 right-0 left-0 h-1.5 bg-yellow-500"></div>
           <div className="p-3 sm:p-4">
             <div className="flex flex-col gap-2">
-              <p className="font-semibold text-base text-gray-800 italic tracking-wider">
+              <p className="text-base font-semibold tracking-wider text-gray-800 italic">
                 JUROS ACUMULADOS
               </p>
-              <div className="flex justify-between items-center">
-                <p className="text-base sm:text-lg font-bold text-red-500 italic tracking-wider">
+              <div className="flex items-center justify-between">
+                <p className="text-base font-bold tracking-wider text-red-500 italic sm:text-lg">
                   R${" "}
                   {totalJuros.toLocaleString("pt-BR", {
                     style: "currency",
                     currency: "BRL",
                   })}
                 </p>
-                <div className="p-4 rounded-lg bg-yellow-500 text-black shadow-md shadow-black">
-                  <AlertTriangle className="w-4 h-4" strokeWidth={2} />
+                <div className="rounded-lg bg-yellow-500 p-4 text-black shadow-md shadow-black">
+                  <AlertTriangle
+                    className="h-4 w-4"
+                    strokeWidth={2}
+                  />
                 </div>
               </div>
             </div>
@@ -152,23 +173,26 @@ export function TabelaContasPagar({ dados }: TabelaContasPagarProps) {
         </div>
 
         {/* Card Multa */}
-        <div className="bg-white rounded-lg shadow-md shadow-black overflow-hidden relative group text-xs sm:text-sm">
-          <div className="absolute top-0 left-0 right-0 h-1.5 bg-red-500"></div>
+        <div className="group relative overflow-hidden rounded-lg bg-white text-xs shadow-md shadow-black sm:text-sm">
+          <div className="absolute top-0 right-0 left-0 h-1.5 bg-red-500"></div>
           <div className="p-3 sm:p-4">
             <div className="flex flex-col gap-2">
-              <p className="font-semibold text-base text-gray-800 italic tracking-wider">
+              <p className="text-base font-semibold tracking-wider text-gray-800 italic">
                 MULTAS APLICADAS
               </p>
-              <div className="flex justify-between items-center">
-                <p className="text-base sm:text-lg font-bold text-red-500 italic tracking-wider">
+              <div className="flex items-center justify-between">
+                <p className="text-base font-bold tracking-wider text-red-500 italic sm:text-lg">
                   R${" "}
                   {totalMulta.toLocaleString("pt-BR", {
                     style: "currency",
                     currency: "BRL",
                   })}
                 </p>
-                <div className="p-4 rounded-lg bg-red-500 text-black shadow-md shadow-black">
-                  <AlertOctagon className="w-4 h-4" strokeWidth={2} />
+                <div className="rounded-lg bg-red-500 p-4 text-black shadow-md shadow-black">
+                  <AlertOctagon
+                    className="h-4 w-4"
+                    strokeWidth={2}
+                  />
                 </div>
               </div>
             </div>
